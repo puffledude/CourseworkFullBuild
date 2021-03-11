@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="content-section">
+    <h2 class="account-heading"> {{property.Properties.address_line_1}} {{property.Properties.address_line_2}}</h2>
+    <br>
+</div>
+<div class="content-section">
+    <h2><a class="article-title" href="{{ url_for('Landlord', user_id= property.Properties.landlord_id) }}">Landlord: {{property.User.name}}</a></h2>
+    <h3>Contact Details:</h3>
+    <p>Email: {{property.User.name}} <br>Phone number: {{property.User.phone_number}}
+</div>
+
+
+<div>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('create_issue', property_id = property.Properties.property_id)}}">Got an issue</a>
+</div>
+
+<div class="content-section">
+    <h3> Current Occupants: </h3>
+    {% for current in occupancies %}
+    <p> <a class="article-title"href=" {{ url_for('Tenant', user_id= current.user_id) }}">{{current.name}}</a></p>
+    {% endfor %}
+    <p>Tenancy started: {{tenancy.start_date}}
+</div>
+
+
+{% endblock content %}

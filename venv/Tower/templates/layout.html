@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main.css') }}">
+
+    {% if title %}
+    <title> Tower System - {{ title }} </title>
+    {% else %}
+    <title> Tower System </title>
+    {% endif %}
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top">
+        <div class="container">
+            <a class="navbar-brand mr-4" href="/">Tower Estates</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+                    aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+                    <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
+                    {% if current_user.is_authenticated %}
+                    <a class="nav item nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    {% else %}
+                    <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
+                    {% endif %}
+                    {% if current_user.role == ('Admin') %}
+                    <a class="nav-item nav-link" href="{{ url_for('Admin', user_id = current_user.user_id)}}">Profile</a>
+                    {% endif %}
+                    {% if current_user.role == ('Tenant') %}
+                    <a class="nav-item nav-link" href="{{ url_for('Tenant', user_id = current_user.user_id)}}">Profile</a>
+                    {% endif %}
+                    {% if current_user.role == ('Landlord') %}
+                    <a class="nav-item nav-link" href="{{ url_for('Landlord', user_id = current_user.user_id)}}">Profile</a>
+                    {% endif %}
+                    {% if current_user.role == ('Contractor') %}
+                    <a class="nav-item nav-link" href="{{ url_for('Contractor', user_id = current_user.user_id)}}">Profile</a>
+                    {% endif %}
+                </div>
+                <!-- Navbar Right Side -->
+
+            </div>
+        </div>
+    </nav>
+</header>
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            {% block content %}{% endblock %}
+        </div>
+        {% if current_user.is_authenticated %}
+        <div class="col-md-4">
+            <div class="content-section">
+                <h3>The Sidebar</h3>
+                <p class='text-muted'> Database Navigation
+                <ul class="list-group">
+                    {% if current_user.role == ('Admin') %}
+                    <li class="list-group-item list-group-item-light"><a class="nav-item nav-link"
+                                                                         href="{{ url_for('search_users') }}">Search
+                        Users</a></li>
+                    <li class="list-group-item list-group-item-light"><a class="nav-item nav-link"
+                                                                         href="{{ url_for('register') }}">Register a New
+                        User</a></li>
+                    <li class="list-group-item list-group-item-light"><a class="nav-item nav-link"
+                                                                         href="{{ url_for('new_property') }}">New
+                        Property</a></li>
+                    <li class="list-group-item list-group-item-light"><a class="nav-item nav-link"
+                                                                         href="{{ url_for('new_tenancy') }}">New
+                        Tenancy</a></li>
+                    <li class="list-group-item list-group-item-light"><a class="nav-item nav-link"
+                                                                         href="{{ url_for('add_tenant') }}"> Add A
+                        Tenant to a Tenancy</a></li>
+                    <li class="list-group-item list-group-item-light"><a class="nav-item nav-link"
+                                                                         href="{{url_for('search_properties') }}">
+                        Search Properties</a></li>
+                    {%elif current_user.role == ('Landlord') %}
+                <li class="list-group-item list-group-item-light"><a class<a class="nav-item nav-link" href="{{url_for('Landlord_issues')}}"> View all issues</a></li>
+                    {%endif%}
+                </ul>
+                </p>
+            </div>
+        {%endif%}
+        </div>
+
+    </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
