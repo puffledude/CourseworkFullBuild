@@ -10,6 +10,11 @@
     <h3>Contact Details:</h3>
     <p>Email: {{property.User.name}} <br>Phone number: {{property.User.phone_number}}
 </div>
+{% if current_user.role == ('Admin') %}
+<div>
+    <a class="btn btn-secondary btn-sm m-1" href="{{url_for('Update_Property', property_id =property.Properties.property_id) }} ">Update details</a>
+</div>
+{% endif %}
 
 
 <div>

@@ -4,7 +4,7 @@ from flask import render_template, url_for, flash, redirect, request, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from Tower.models import User, Properties, Tenancies, Issue, Issue_Notes, Jobs, Jobs_Notes
 from Tower.forms import RegistrationForm, PropertiesForm, User_search_Form, LoginForm, IssueForm, New_tenancy_Form,\
-    Property_search_Form,Add_Tenant_Form, Update_User_Form, Update_Contractor_Form, note_form
+    Property_search_Form,Add_Tenant_Form, Update_User_Form, Update_Contractor_Form, note_form, Update_Properties_form
 
 
 @app.route("/")
@@ -247,10 +247,11 @@ def Property(property_id):
 def Update_Property(property_id):
     if current_user.role !=("Admin"):
         abort(403)
+    form = Update_Properties_form()
     landlords = db.session.query(User).filter(User.role == "Landlord")
     landlord_list = [(i.user_id, i.name) for i in landlords]
     form.Landlord.choices = landlord_list #Fills in the landlord choices box
-    property = db.session.query(Properties).filter(Properties.property_id == property_id)
+    property = db.session.query(Properties).filter(Properties.property_id == property_id).first()
     if form.validate_on_submit():
         property.address_line_1 = form.address_line_1.data
         property.address_line_2 = form.address_line_2.data
@@ -259,10 +260,11 @@ def Update_Property(property_id):
         flash("The property has been updated!", "success")
         return redirect(url_for("home"))
     elif request.method == "GET":
-        form.Landlord.data = property.landlord_id,data
+        form.Landlord.data = property.landlord_id
+        form.postcode.data = property.postcode
         form.address_line_1.data = property.address_line_1
         form.address_line_2.data = property.address_line_2
-    return render_template("new_property.html", title="New Property", form=form)
+    return render_template("Update_Property.html", title="New Property", form=form)
 
 @app.route("/Landlord/<int:user_id>")
 @login_required

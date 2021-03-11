@@ -22,7 +22,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(64), nullable=False)
     properties = db.relationship("Properties",cascade="all, delete-orphan" ,backref="User", lazy=True)
     occupants = db.relationship("Tenancies", backref="User", secondary=occupants, lazy=True)
-    contractor = db.relationship("Quotes", cascadde="all, delete-orphan",backref="User", lazy=True)
+    contractor = db.relationship("Quotes", cascade="all, delete-orphan",backref="User", lazy=True)
 
     def __repr__(self):
         return f"User('{self.name}', '{self.phone_number}', '{self.role}', '{self.email}')"
