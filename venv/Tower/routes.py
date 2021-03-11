@@ -247,8 +247,22 @@ def Property(property_id):
 def Update_Property(property_id):
     if current_user.role !=("Admin"):
         abort(403)
-
-
+    landlords = db.session.query(User).filter(User.role == "Landlord")
+    landlord_list = [(i.user_id, i.name) for i in landlords]
+    form.Landlord.choices = landlord_list #Fills in the landlord choices box
+    property = db.session.query(Properties).filter(Properties.property_id == property_id)
+    if form.validate_on_submit():
+        property.address_line_1 = form.address_line_1.data
+        property.address_line_2 = form.address_line_2.data
+        property.landlord_id = form.Landlord.data
+        db.session.commit()
+        flash("The property has been updated!", "success")
+        return redirect(url_for("home"))
+    elif request.method == "GET":
+        form.Landlord.data = property.landlord_id,data
+        form.address_line_1.data = property.address_line_1
+        form.address_line_2.data = property.address_line_2
+    return render_template("new_property.html", title="New Property", form=form)
 
 @app.route("/Landlord/<int:user_id>")
 @login_required

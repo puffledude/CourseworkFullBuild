@@ -96,6 +96,17 @@ class PropertiesForm(FlaskForm):
 
     submit = SubmitField('Register property')
 
+class Update_Properties_form(FlaskForm):
+    address_line_1 = StringField("Address Line 1",
+                                 validators=[DataRequired(), Length(min=2, max=60)])
+    address_line_2 = StringField("Address Line 2",
+                                 validators=[Length(max=60)])
+    postcode = StringField("Post code",
+                           validators=[DataRequired(), Length(min=5, max=10)])
+    Landlord = SelectField("Landlord", coerce=str)
+
+    submit = SubmitField('Update property')
+
 #def edit_landlord(request, landlord_id):
     #landlord = landlords.query.get(landlord_id)
     #form = PropertiesForm(request.POST, obj=landlord)
