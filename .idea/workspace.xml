@@ -1,43 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/CourseworkFullBuild.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+    <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="Unfucked directory structure">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/Branch.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/Static/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/forms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/routes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/site.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/403.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/404.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/Admin.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/Issue.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/Landlord.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/Property.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/Search_Properties.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/Search_Users.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/Tenant.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/Update_Contractor.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/Update_Property.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/Update_User.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/about.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/add_tenant.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/all_issues.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/create_issue.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/issue_note.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/layout.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/new_property.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/new_tenancy.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Tower/templates/register.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/run.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/site.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/templates/Tenant.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Tenant.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +80,37 @@
       <option name="presentableId" value="Default" />
       <updated>1615549141668</updated>
     </task>
+    <task id="LOCAL-00001" summary="Unfucked directory structure">
+      <created>1615561325362</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1615561325362</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Unfucked directory structure">
+      <created>1615561455975</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1615561455975</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Unfucked directory structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="Unfucked directory structure" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="14" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1615560929474">
@@ -105,25 +121,29 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="462" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1615561043333" />
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1615561093892">
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1615563315402">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1615561093892" />
-    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1615561093892">
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1615563315402" />
+    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1615563315401">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1615561093892" />
-    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1615561093892">
+    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1615563315401" />
+    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1615563315401">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1615561093892" />
-    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1615561093892">
+    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1615563315401" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1615563315401">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1615561093892" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1615563315401" />
     <state x="86" y="0" width="998" height="728" key="SettingsEditor" timestamp="1615561229059">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="86" y="0" width="998" height="728" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1615561229059" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1615561466031">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1615561466031" />
   </component>
 </project>
