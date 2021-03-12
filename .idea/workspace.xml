@@ -20,11 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="Extra details in Tenant Page.">
-      <change afterPath="$PROJECT_DIR$/Tower/templates/add_job.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Full Build.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Full Build.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/templates/Issue.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Issue.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/templates/Landlord.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Landlord.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/layout.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +41,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1pegnwhgJCsle3BBNXeIK8X7W5Y" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -123,44 +123,11 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Unfucked directory structure" />
     <MESSAGE value="Extra details in Tenant Page." />
     <option name="LAST_COMMIT_MESSAGE" value="Extra details in Tenant Page." />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="137" y="14" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1615560929474">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="137" y="14" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1615560929474" />
-    <state x="462" y="119" key="FileChooserDialogImpl" timestamp="1615561043333">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="462" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1615561043333" />
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1615563315402">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1615563315402" />
-    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1615563315401">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1615563315401" />
-    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1615563315401">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1615563315401" />
-    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1615563315401">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1615563315401" />
-    <state x="86" y="0" width="998" height="728" key="SettingsEditor" timestamp="1615561229059">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="86" y="0" width="998" height="728" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1615561229059" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1615561466031">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1615561466031" />
   </component>
 </project>
