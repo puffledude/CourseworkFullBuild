@@ -380,14 +380,13 @@ def Approve_issue(issue_id):
 def Create_Job(issue_id):
     if current_user.role !=("Admin"):
         abort(403)
-    issue = db.session.query(Issue).filter(Issue.issue_id == issue_id)
     form = IssueForm()
     if form.validate_on_submit():
         job = Jobs(issue=issue_id, summary= form.summary.data, content=form.content.data)
         db.session.add(job)
         db.commit()
         return redirect(url_for('Issue_page', issue_id=issue_id))
-    return render_template()
+    return render_template("add_job.html", form=form)
 
 
 
