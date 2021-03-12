@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="content-section">
+    <h2>All open issues</h2>
+</div>
+
+
+
+<div class="content-section">
+    {% for content in issues.items %}
+    <div class="content-section">
+        <h2><a class="article-title" href="{{ url_for('Issue_page', issue_id=content.Issue.issue_id) }} ">{{content.Issue.summary}}</a></h2>
+        <p>Address: {{content.Properties.address_line_1}} {{content.Properties.address_line_2}} </p>
+        <p>Issue Posted: {{content.Issue.post_time}}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<div>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{next_url}}">Next Page</a>
+</div>
+
+<div>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{prev_url}}">Previous Page</a>
+</div>
+
+{% endblock content %}

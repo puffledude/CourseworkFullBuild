@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4"> Join Today </legend>
+                <div class="form-group">
+                {{ form.Tenant.label(class="form-control-label") }}
+                    {% if form.Tenant.errors %}
+                        {{ form.Tenant(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.Tenant.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.Tenant(class="form-control form-control-lg") }}
+                    {% endif %}
+                <div class="form-group">
+                {{ form.Tenancy.label(class="form-control-label") }}
+                    {% if form.Tenancy.errors %}
+                        {{ form.Tenancy(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.Tenancy.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+
+                    {% else %}
+                        {{ form.Tenancy(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+
+    </div>
+
+{% endblock content %}
