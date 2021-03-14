@@ -21,14 +21,23 @@
     {% endif %}
 {% endif %}
 
-{% if current_user.role == ('Admin) %}
+{% if current_user.role == ('Admin') %}
     {%if issue.approved == True %}
     <div>
-        <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('Create_Job', issue_id = issue.issue_id) }}">Create a Job</a>
+        <a class="btn btn-secondary btn-sm m-1" href=" {{create_a_job}}">Create a Job</a>
     </div>
     {% endif %}
 {% endif %}
 
+<div class="content-section">
+    <h2 class="article-title">Jobs</h2>
+    {% for job in jobs %}
+        <div class="content-section">
+            <h3> {{ job.summary }}</h3>
+            <p>{{job.content}}</p>
+        </div>
+    {% endfor %}
+</div>
 
 
 <div class="content-section">

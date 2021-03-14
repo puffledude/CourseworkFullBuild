@@ -169,6 +169,8 @@ def search_properties():
 @app.route("/Tenant/<int:user_id>")
 @login_required
 def Tenant(user_id):
+    if current_user.role != ("Admin") and current_user.user_id != user_id:
+        abort(403)
     users = db.session.query(User).filter(User.user_id == user_id).first()
     if users.role != ("Tenant"):
         abort(404)
@@ -336,13 +338,15 @@ def Issue_page(issue_id):
     page = request.args.get("page", 1, type=int)
     issue = db.session.query(Issue).filter(Issue.issue_id == issue_id).first()
     print(issue)
+    jobs = db.session.query(Jobs).filter(Jobs.issue == issue_id).all()
     found_notes = db.session.query(Issue_Notes).filter(Issue_Notes.issue == Issue.issue_id).order_by(Issue_Notes.note_id.desc())
     notes = found_notes.paginate(page, per_page=5)
     next_url = url_for("Issue", page = notes.next_num)\
     if notes.has_next else None
     prev_url = url_for("Issue", page=notes.prev_num)\
     if notes.has_prev else None
-    return render_template("Issue.html", title="Issue", issue=issue, notes=notes, next_url=next_url, prev_url=prev_url)
+    create_a_job = url_for("Create_Job", issue_id=issue_id)
+    return render_template("Issue.html", title="Issue", issue=issue, notes=notes, next_url=next_url, prev_url=prev_url, create_a_job=create_a_job, jobs=jobs)
 
 @app.route("/Issue_note_page/<int:issue_id>", methods=["GET", "POST"])
 @login_required
@@ -390,7 +394,7 @@ def Approve_issue(issue_id):
         flash("You do not have the power to authorize approval", "Failure")
         return redirect(url_for("home"))
 
-@app.route("/Create_Job/<int:issue_id>")
+@app.route("/Create_Job/<int:issue_id>", methods=["POST", "GET"])
 @login_required
 def Create_Job(issue_id):
     if current_user.role !=("Admin"):
@@ -399,7 +403,7 @@ def Create_Job(issue_id):
     if form.validate_on_submit():
         job = Jobs(issue=issue_id, summary= form.summary.data, content=form.content.data)
         db.session.add(job)
-        db.commit()
+        db.session.commit()
         return redirect(url_for('Issue_page', issue_id=issue_id))
     return render_template("add_job.html", form=form)
 
