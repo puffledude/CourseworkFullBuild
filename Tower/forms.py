@@ -84,6 +84,10 @@ class Update_Contractor_Form(FlaskForm):
         if user:
             raise ValidationError("The email entered is taken. Please choose a different one.")
 
+
+class Delete_Form(FlaskForm):
+    submit = SubmitField("Delete")
+
 class PropertiesForm(FlaskForm):
 
     address_line_1 = StringField("Address Line 1",

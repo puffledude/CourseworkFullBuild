@@ -4,7 +4,8 @@ from flask import render_template, url_for, flash, redirect, request, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from Tower.models import User, Properties, Tenancies, Issue, Issue_Notes, Jobs, Jobs_Notes
 from Tower.forms import RegistrationForm, PropertiesForm, User_search_Form, LoginForm, IssueForm, New_tenancy_Form,\
-    Property_search_Form,Add_Tenant_Form, Update_User_Form, Update_Contractor_Form, note_form, Update_Properties_form
+    Property_search_Form, Add_Tenant_Form, Update_User_Form, Update_Contractor_Form, note_form, Update_Properties_form,\
+    Delete_Form
 
 
 @app.route("/")
@@ -12,9 +13,11 @@ from Tower.forms import RegistrationForm, PropertiesForm, User_search_Form, Logi
 def home():
     return render_template("home.html")
 
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html")
+
 
 @app.errorhandler(403)
 def unauthorised(e):
@@ -70,7 +73,7 @@ def search_users():
         abort(403) #Redirects to a 403 error
     form = User_search_Form()
     if form.validate_on_submit():
-        SearchData = db.session.query(User).filter(User.name.like('%'+form.name.data+'%')).all() #Queries the searchdata
+        SearchData = db.session.query(User).filter(User.name.like('%'+form.name.data+'%')).all() #Queries the Searched Data
         print(SearchData)
         return render_template("Search_Users.html", SearchData=SearchData, form=form)
     return render_template("Search_Users.html", title = "Search Users", form=form)
@@ -97,7 +100,7 @@ def logout():
     logout_user()
     return redirect(url_for("home"))
 
-@app.route("/emergency", methods=["GET", "POST"]) #Disable before delpoyment !!!!!!!
+@app.route("/emergency", methods=["GET", "POST"]) #Disable before deployment !!!!!!!
 def emergency():
     form = RegistrationForm()  # Loads registration form from forms
     if form.validate_on_submit():  # Checks if the form is valid
@@ -181,11 +184,16 @@ def Tenant(user_id):
 def Delete_user(user_id):
     if current_user.role != ("Admin"):
         abort(403)
-    user = db.session.query(User).filter(User.user_id == user_id)
-    db.session.delete(user)
-    db.session.commit()
-    flash("The user and their associated data has been deleted")
-    return redirect(url_for('home'))
+    form = Delete_Form()
+    if form.validate_on_submit:  # If the form validates on submission
+        user = db.session.query(User).filter(User.user_id == user_id).first()
+        for present in user.Tenancies:  # Unlinks a user from a Tenancy
+            user.Tenancies.remove(present)
+        db.session.delete(user)  # Deletes the user
+        db.session.commit()
+        flash("The user and their associated data has been deleted", "Success")
+        return redirect(url_for('home'))
+    return render_template("Delete_page.html", form=form)
 
 @app.route("/Update_User/<int:user_id>" , methods=["GET", "POST"]) #Currently broken. Needs fixing
 @login_required
@@ -203,10 +211,12 @@ def Update_User(user_id):
             user.email = form.email.data
             user.phone_number = form.email.data
             user.name = form.name.data
+            flash("The user has been updated")
+            return redirect(url_for("home"))
             db.session.commit()
         elif request.method == "GET":
             form.name.data = user.name  # Loads the users name into the form
-            form.phone_number.data # Loads the user's phone number into the form.
+            form.phone_number.data =user.phone_number# Loads the user's phone number into the form.
             form.business_name = user.business #Loads the user's business name into the form
         return render_template("Update_Contractor.html",legend=("Update a User") ,user=user, form=form)
     else:
@@ -221,7 +231,7 @@ def Update_User(user_id):
             flash("The user has been updated", "success")
             db.session.commit()
             return redirect(url_for('home'))
-        elif request.method == "GET": #If a GET request is recived
+        elif request.method == "GET": #If a GET request is received
             form.name.data = user.name #Loads the users name into the form
             form.phone_number.data = user.phone_number #Loads the user's phone number into the form.
         return render_template("Update_User.html",legend=("Update a User"), user=user, form=form)
@@ -241,6 +251,11 @@ def Property(property_id):
     return render_template("Property.html", title="Property", property=property, occupancies=occupancies, tenancy=tenancy)
 
 @app.route("/Delete_property/<int:property_id>")
+@login_required
+def Delete_property(property_id):
+    pass
+
+
 
 @app.route("/Property_update/<int:property_id>", methods=["GET", "POST"])
 @login_required
@@ -362,7 +377,7 @@ def Landlord_issues():
 @app.route("/Approve_issue/<int:issue_id>")
 @login_required
 def Approve_issue(issue_id):
-    if current_user.role !=("Landlord"):
+    if current_user.role !="Landlord":
         abort(403)
     properties = db.session.query(Properties, Issue).outerjoin(Properties, Properties.property_id == Issue.property_id).filter(Properties.landlord_id == current_user.user_id).filter(Issue.issue_id == issue_id).first()
     if properties:
@@ -372,7 +387,7 @@ def Approve_issue(issue_id):
         flash("Work has been authorized")
         return redirect(url_for('Issue_page', issue_id=issue_id))
     else:
-        flash("You do not have the power to authorize approval", "Failiure")
+        flash("You do not have the power to authorize approval", "Failure")
         return redirect(url_for("home"))
 
 @app.route("/Create_Job/<int:issue_id>")

@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2 class="article-section">Delete User</h2>
+<p class="content-section">Are you sure want to delete this user? All data linked to them will be deleted<br></p>
+<form method="POST" action="">
+        {{ form.hidden_tag() }}
+    <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+    </div>
+</form>
+{% endblock content %}

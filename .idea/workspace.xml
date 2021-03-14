@@ -19,11 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="Extra details in Tenant Page.">
-      <change beforePath="$PROJECT_DIR$/.idea/Full Build.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Full Build.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="Added issues link to sidebar">
+      <change afterPath="$PROJECT_DIR$/Tower/templates/Delete_page.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/site.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/templates/Issue.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Issue.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/templates/Tenant.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Tenant.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +52,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/run.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -110,7 +114,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615563379888</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added issues link to sidebar">
+      <created>1615571590685</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1615571590685</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -128,6 +139,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Unfucked directory structure" />
     <MESSAGE value="Extra details in Tenant Page." />
-    <option name="LAST_COMMIT_MESSAGE" value="Extra details in Tenant Page." />
+    <MESSAGE value="Added issues link to sidebar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added issues link to sidebar" />
   </component>
 </project>

@@ -10,6 +10,7 @@
 {% if current_user.role == ('Admin') %}
 <div>
     <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('Update_User', user_id = users.user_id) }}">Update User</a>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('Delete_user', user_id = users.user_id) }}">Delete User</a>
 </div>
 {% endif %}
 <div class="content-section">

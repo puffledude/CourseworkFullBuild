@@ -24,7 +24,7 @@
 {% if current_user.role == ('Admin) %}
     {%if issue.approved == True %}
     <div>
-        <a class="btn btn-secondary btn-sm m-1" href="{{url_for('Create_Job', issue_id = issue.issue_id)}}">Create a Job</a>
+        <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('Create_Job', issue_id = issue.issue_id) }}">Create a Job</a>
     </div>
     {% endif %}
 {% endif %}
