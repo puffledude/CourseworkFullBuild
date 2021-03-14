@@ -4,11 +4,10 @@
 <div class="content-section">
     <h2 class="account-heading"> {{user.name}}</h2>
     <br>
-</div>
-<div class="content-section">
-    <h2>Contact Details</h2>
+        <h2>Contact Details</h2>
     <p>Email: {{user.email}} <br>Phone Number: {{user.phone_number}} </p>
 </div>
+
 
 {% if current_user.role == ('Admin') %}
 <div>
