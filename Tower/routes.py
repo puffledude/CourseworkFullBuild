@@ -185,13 +185,13 @@ def Delete_user(user_id):
     if current_user.role != ("Admin"):
         abort(403)
     form = Delete_Form()
-    if form.validate_on_submit:  # If the form validates on submission
+    if form.validate_on_submit():  # If the form validates on submission
         user = db.session.query(User).filter(User.user_id == user_id).first()
         for present in user.Tenancies:  # Unlinks a user from a Tenancy
             user.Tenancies.remove(present)
         db.session.delete(user)  # Deletes the user
         db.session.commit()
-        flash("The user and their associated data has been deleted", "Success")
+        flash("The user and their associated data has been deleted", "success")
         return redirect(url_for('home'))
     return render_template("Delete_page.html", form=form)
 
