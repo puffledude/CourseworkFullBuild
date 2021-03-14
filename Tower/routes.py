@@ -298,7 +298,7 @@ def Landlord(user_id):
 def Admin(user_id):
     if current_user.role !=("Admin"):
         abort(403)
-    user = db.session.query(User).filter(User.user_id == user_id)
+    user = db.session.query(User).filter(User.user_id == user_id).first()
     if user.role !=("Admin"):
         abort(404)
     return render_template("Admin.html", title = "User Profile",user=user)

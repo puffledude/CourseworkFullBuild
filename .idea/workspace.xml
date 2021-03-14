@@ -19,9 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="">
+    <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="Deletion warning page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/site.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/templates/Admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/templates/Landlord.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Landlord.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +125,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615727278736</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Deletion warning page">
+      <created>1615728793889</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1615728793889</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -143,6 +152,7 @@
     <MESSAGE value="Extra details in Tenant Page." />
     <MESSAGE value="Added issues link to sidebar" />
     <MESSAGE value="Deletion on Tenants" />
-    <option name="LAST_COMMIT_MESSAGE" value="Deletion on Tenants" />
+    <MESSAGE value="Deletion warning page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Deletion warning page" />
   </component>
 </project>
