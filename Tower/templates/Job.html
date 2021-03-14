@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<a class="btn btn-secondary btn-sm m-1" href="{{url_for('Issue', issue_id = Job.issue) }}">Return to Issue</a>
+
+
+<div class="content-section">
+    <h2 class="account-heading"> {{ job.summary }}</h2>
+    <br>
+    <p>{{job.content}}</p>
+</div>
+
+<div class="content-section">
+    <h2 class="article-title"> Quotes</h2>
+    {% for quote in quotes %}
+        <div class="content-section">
+            <p> quote.content</p>
+        </div>
+    {% endfor %}
+</div>
+
+
+{% endblock content %}

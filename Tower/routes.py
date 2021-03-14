@@ -405,7 +405,7 @@ def Create_Job(issue_id):
         db.session.add(job)
         db.session.commit()
         return redirect(url_for('Issue_page', issue_id=issue_id))
-    return render_template("add_job.html", form=form)
+    return render_template("add_job.html", form=form, legend=("Create a Job"))
 
 
 
