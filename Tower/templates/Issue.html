@@ -33,7 +33,7 @@
     <h2 class="article-title">Jobs</h2>
     {% for job in jobs %}
         <div class="content-section">
-            <h3> {{ job.summary }}</h3>
+            <a class="article-title" href="{{ url_for('Job', job_id = job.job_id) }}"><h3> {{ job.summary }}</h3></a>
             <p>{{job.content}}</p>
         </div>
     {% endfor %}

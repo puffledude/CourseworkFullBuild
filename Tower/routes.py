@@ -2,7 +2,7 @@ from Tower import app, bcrypt
 from .Branch import db, login_manager
 from flask import render_template, url_for, flash, redirect, request, abort
 from flask_login import login_user, current_user, logout_user, login_required
-from Tower.models import User, Properties, Tenancies, Issue, Issue_Notes, Jobs, Jobs_Notes
+from Tower.models import User, Properties, Tenancies, Issue, Issue_Notes, Jobs, Jobs_Notes, Quotes
 from Tower.forms import RegistrationForm, PropertiesForm, User_search_Form, LoginForm, IssueForm, New_tenancy_Form,\
     Property_search_Form, Add_Tenant_Form, Update_User_Form, Update_Contractor_Form, note_form, Update_Properties_form,\
     Delete_Form
@@ -407,8 +407,12 @@ def Create_Job(issue_id):
         return redirect(url_for('Issue_page', issue_id=issue_id))
     return render_template("add_job.html", form=form, legend=("Create a Job"))
 
-
-
+@app.route("/Job<int:job_id>")
+@login_required
+def Job(job_id):
+    job = db.session.query(Jobs).filter(Jobs.job_id == job_id).first()
+    quotes = db.session.query(Quotes).filter(Quotes.job == job_id).all()
+    return render_template("Job.html", job=job, quotes=quotes)
 
 @app.route("/Contractor/<int:user_id>")
 @login_required

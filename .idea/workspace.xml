@@ -20,9 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Tower/templates/Job.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tower/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/templates/Issue.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Issue.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615755353951</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Job page html created">
+      <created>1615761146560</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1615761146560</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,6 +191,7 @@
     <MESSAGE value="Deletion and Updates on all user pages" />
     <MESSAGE value="Updating layouts" />
     <MESSAGE value="Creating a job is now functional" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating a job is now functional" />
+    <MESSAGE value="Job page html created" />
+    <option name="LAST_COMMIT_MESSAGE" value="Job page html created" />
   </component>
 </project>
