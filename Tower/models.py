@@ -1,4 +1,5 @@
-from .Branch import db, login_manager
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from .Branch import db, login_manager , app
 from flask_login import UserMixin
 from datetime import datetime
 
@@ -23,6 +24,19 @@ class User(db.Model, UserMixin):
     properties = db.relationship("Properties",cascade="all, delete-orphan" ,backref="User", lazy=True)
     occupants = db.relationship("Tenancies", backref="User", secondary=occupants, lazy=True)
     contractor = db.relationship("Quotes", cascade="all, delete-orphan",backref="User", lazy=True)
+
+    def get_reset_token(self, expires_sec=1800):
+        s = Serializer(app.config['SECRET_KEY'], expires_sec)
+        return s.dumps({'user_id': self.user_id}).decode("utf-8")
+
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
 
     def __repr__(self):
         return f"User('{self.name}', '{self.phone_number}', '{self.role}', '{self.email}')"

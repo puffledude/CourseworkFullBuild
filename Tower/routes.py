@@ -1,12 +1,12 @@
-from Tower import app, bcrypt
+from Tower import app, bcrypt, mail
 from .Branch import db, login_manager
 from flask import render_template, url_for, flash, redirect, request, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from Tower.models import User, Properties, Tenancies, Issue, Issue_Notes, Jobs, Jobs_Notes, Quotes
 from Tower.forms import RegistrationForm, PropertiesForm, User_search_Form, LoginForm, IssueForm, New_tenancy_Form,\
     Property_search_Form, Add_Tenant_Form, Update_User_Form, Update_Contractor_Form, note_form, Update_Properties_form,\
-    Delete_Form
-
+    Delete_Form, RequestResetForm, ResetPasswordForm
+from flask_mail import Message
 
 @app.route("/")
 @app.route("/home")  # Home page for the web app
@@ -405,9 +405,50 @@ def Create_Job(issue_id):
         db.session.add(job)
         db.session.commit()
         return redirect(url_for('Issue_page', issue_id=issue_id))
-    return render_template("add_job.html", form=form, legend=("Create a Job"))
+    return render_template("add_job.html", form=form, legend=("Create a Job"), title=("Create a Job"))
 
-@app.route("/Job<int:job_id>")
+
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message("Password Reset Request", sender="noreply@Towercoursework.com",
+                  recipients=[user.email])
+    msg.body = f'''To reset your password, visit the following link:
+    {url_for('reset_token', token=token, _external=True)}
+If you did not make this request, ignore this email and no changes will be made
+'''
+    mail.send(msg)
+
+@app.route("/reset_password", methods=["POST", "GET"])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for("home"))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email = form.email.data).first()
+        send_reset_email(user)
+        flash("Your email has been sent with instructions to reset your password,", "info")
+        return redirect(url_for("login"))
+    return render_template("reset_request.html", title="Reset Password", form=form)
+
+
+@app.route("/reset_password/<token>", methods=["POST", "GET"])
+def reset_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for("home"))
+    user = User.verify_reset_token(token)
+    if user is None:
+        flash("That is an invalid or expired token", "warning")
+        return redirect(url_for("reset_request"))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():  # Checks if the form is valid
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
+        user.password = hashed_password
+        db.session.commit()  # Commits new entry to the database
+        flash("Your password has been updated!", "success")
+        return redirect(url_for("login"))
+    return render_template("reset_token.html", title="Reset Password", form=form)
+
+@app.route("/Job/<int:job_id>")
 @login_required
 def Job(job_id):
     job = db.session.query(Jobs).filter(Jobs.job_id == job_id).first()
