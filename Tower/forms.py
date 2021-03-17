@@ -177,6 +177,14 @@ class ResetPasswordForm(FlaskForm):
                                      validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField("Reset Password")
 
+class Invite_Form(FlaskForm):
+    contractor = SelectField("Contractor", coerce=str)
+    submit = SubmitField("Invite contractor")
+
+class Quote_Form(FlaskForm):
+    content = TextAreaField("Quote details")
+    submit = SubmitField("Give Quote")
+
 # class UpdateAccountForm(FlaskForm):
 #     username = StringField("Username",
 #                            validators=[DataRequired(), Length(min=2, max=20)])

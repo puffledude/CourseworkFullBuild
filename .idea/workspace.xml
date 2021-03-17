@@ -20,15 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Tower/templates/reset_request.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tower/templates/reset_token.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tower/templates/Add_Quote.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tower/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tower/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/site.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +59,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/run.py" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
   <component name="RunManager">
     <configuration name="run" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -180,7 +175,21 @@
       <option name="project" value="LOCAL" />
       <updated>1615834940609</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Password reset function">
+      <created>1615839667798</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1615839667798</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Spelling">
+      <created>1616009768939</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1616009768939</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -206,6 +215,8 @@
     <MESSAGE value="Creating a job is now functional" />
     <MESSAGE value="Job page html created" />
     <MESSAGE value="Job Route and button implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="Job Route and button implemented" />
+    <MESSAGE value="Password reset function" />
+    <MESSAGE value="Spelling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Spelling" />
   </component>
 </project>

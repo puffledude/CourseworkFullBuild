@@ -5,7 +5,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from Tower.models import User, Properties, Tenancies, Issue, Issue_Notes, Jobs, Jobs_Notes, Quotes
 from Tower.forms import RegistrationForm, PropertiesForm, User_search_Form, LoginForm, IssueForm, New_tenancy_Form,\
     Property_search_Form, Add_Tenant_Form, Update_User_Form, Update_Contractor_Form, note_form, Update_Properties_form,\
-    Delete_Form, RequestResetForm, ResetPasswordForm
+    Delete_Form, RequestResetForm, ResetPasswordForm, Invite_Form, Quote_Form
 from flask_mail import Message
 
 @app.route("/")
@@ -454,6 +454,42 @@ def Job(job_id):
     job = db.session.query(Jobs).filter(Jobs.job_id == job_id).first()
     quotes = db.session.query(Quotes).filter(Quotes.job == job_id).all()
     return render_template("Job.html", job=job, quotes=quotes)
+
+
+@app.route("/Create_a_quote/<int:job_id>")
+@login_required
+def Invite_contractor(job_id):
+    if current_user.role == "Admin":
+        abort(403)
+    form = Invite_Form()
+    contractors = db.session.query(User).filter(User.role == ("Contractor")).all()
+    contractor_list = [(i.user_id, i.name) for i in contractors]
+    form.contractor.choices = contractor_list
+    if form.validate_on_submit():
+        chosen = db.session.query(User).filter(User.user_id == form.contractor.data).first()
+        msg = Message("Job Invite", sender="noreply@Towercoursework.com", recipients=[chosen.email])
+        msg.body = f'''Hello {chosen.name}, You have been invited give a quote on a job. To view more details, click this link and sign in:
+{url_for("Add_quote", job_id = job_id, _external=True)}
+Thank you'''
+
+
+@app.route("/Create_a_quote/<int:job_id>")
+@login_required
+def Add_quote(job_id):
+    if current_user.role == "Contractor":
+        abort(403)
+    form = Quote_Form()
+    job = db.session.query(Jobs).filter(Jobs.job_id == job_id).first()
+    issue = db.session.query(Issue).filter(Issue.issue_id == job.issue).first()
+    if form.validate_on_submit():
+        quote = Quotes(content = form.content.data, job = job_id)
+        db.session.add(quote)
+        db.session.commit()
+        flash("The quote has been added", "success")
+        return redirect(url_for("home"))
+    return render_template("Add_Quote.html", form=form, job=job, issue=issue)
+
+
 
 @app.route("/Contractor/<int:user_id>")
 @login_required
