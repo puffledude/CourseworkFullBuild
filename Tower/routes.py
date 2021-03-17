@@ -456,10 +456,10 @@ def Job(job_id):
     return render_template("Job.html", job=job, quotes=quotes)
 
 
-@app.route("/Create_a_quote/<int:job_id>")
+@app.route("/Create_a_quote/<int:job_id>", methods=["GET", "POST"])
 @login_required
 def Invite_contractor(job_id):
-    if current_user.role == "Admin":
+    if current_user.role != ("Admin"):
         abort(403)
     form = Invite_Form()
     contractors = db.session.query(User).filter(User.role == ("Contractor")).all()
@@ -471,9 +471,11 @@ def Invite_contractor(job_id):
         msg.body = f'''Hello {chosen.name}, You have been invited give a quote on a job. To view more details, click this link and sign in:
 {url_for("Add_quote", job_id = job_id, _external=True)}
 Thank you'''
+        mail.send(msg)
+        return redirect(url_for("Job", job_id=job_id))
+    return render_template("Invite_contractor.html",  title="Invite a contractor", form=form)
 
-
-@app.route("/Create_a_quote/<int:job_id>")
+@app.route("/Add_quote/<int:job_id>", methods=["GET", "POST"])
 @login_required
 def Add_quote(job_id):
     if current_user.role == "Contractor":

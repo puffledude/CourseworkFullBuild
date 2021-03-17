@@ -10,6 +10,8 @@
     <p>{{job.content}}</p>
 </div>
 
+<a class="btn btn-secondary btn-sm m-1" href="{{url_for('Invite_contractor', job_id = job.job_id)}}">Invite a Contractor</a>
+
 <div class="content-section">
     <h2 class="article-title"> Quotes</h2>
     {% for quote in quotes %}
