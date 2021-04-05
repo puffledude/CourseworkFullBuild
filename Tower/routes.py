@@ -466,8 +466,10 @@ def reset_token(token):
 @login_required
 def Job(job_id):
     job = db.session.query(Jobs).filter(Jobs.job_id == job_id).first()
-    quotes = db.session.query(Quotes).filter(Quotes.job == job_id).all()
+    quotes = db.session.query(Quotes, User).outerjoin(Quotes, User.user_id == Quotes.contractor).filter(Quotes.job == job_id).all()
     return render_template("Job.html", job=job, quotes=quotes)
+
+
 
 
 @app.route("/Create_a_quote/<int:job_id>", methods=["GET", "POST"])

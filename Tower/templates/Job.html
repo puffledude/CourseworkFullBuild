@@ -16,7 +16,8 @@
     <h2 class="article-title"> Quotes</h2>
     {% for quote in quotes %}
         <div class="content-section">
-            <p> {{quote.content}} </p>
+            <h3> {{quote.User.name}}</h3>
+            <p> {{quote.Quotes.content}} </p>
         </div>
     {% endfor %}
 </div>
