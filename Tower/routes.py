@@ -42,6 +42,10 @@ def register():
         db.session.add(user)
         db.session.commit()  # Commits new entry to the database
         flash("The account has been created!", "success")
+        msg = Message("Registration", sender="noreply@Towercoursework.com", recipients=[user])
+        msg.body = f''' Dear {user.name}
+        You have been successfully registered to the Tower Estates online management system.
+With this you can register any issues you have with your property'''
         return redirect(url_for("home"))
 
     return render_template("register.html", title="Register", form=form)  # Renders template for the user
@@ -310,11 +314,15 @@ def Admin(user_id):
 def create_issue(property_id):
     form = IssueForm()
     if form.validate_on_submit():
-        property=db.session.query(Properties).filter(Properties.property_id == property_id)
+        property=db.session.query(Properties).filter(Properties.property_id == property_id).first()
         issue = Issue(summary=form.summary.data, content = form.content.data, property_id = property_id)
         db.session.add(issue)
         db.session.commit()
         flash("Your issue has been opened", "success")
+        landlord = db.session.query(User).filter(User.user_id == property.landlord_id).first()
+        msg = Message("New Issue",sender="noreply@Towercoursework.com" , recipients=[landlord])
+        msg.body=f'''A new issue has been created at {property.address_line_1} {property.address_line_1}'''
+        mail.send(msg)
         return redirect(url_for("home"))
     return render_template("create_issue.html", title="Create an issue", form=form)
 
@@ -404,6 +412,12 @@ def Create_Job(issue_id):
         job = Jobs(issue=issue_id, summary= form.summary.data, content=form.content.data)
         db.session.add(job)
         db.session.commit()
+        issue = db.session.query(Issue).filter(Issue.issue_id == issue_id).first()
+        property = db.session.query(Properties).filter(Properties.property_id == issue.property_id).first()
+        landlord = db.session.query(User).filter(User.user_id == property.landlord_id).first()
+        msg = Message("New Job", sender="noreply@Towercoursework.com", recipients=[landlord.email])
+        msg.body = f'''A new job has been made for an issue at {property.address_line_1} {property.address_line_2}'''
+        mail.send(msg)
         return redirect(url_for('Issue_page', issue_id=issue_id))
     return render_template("add_job.html", form=form, legend=("Create a Job"), title=("Create a Job"))
 
@@ -478,13 +492,13 @@ Thank you'''
 @app.route("/Add_quote/<int:job_id>", methods=["GET", "POST"])
 @login_required
 def Add_quote(job_id):
-    if current_user.role == "Contractor":
+    if current_user.role != "Contractor":
         abort(403)
     form = Quote_Form()
     job = db.session.query(Jobs).filter(Jobs.job_id == job_id).first()
     issue = db.session.query(Issue).filter(Issue.issue_id == job.issue).first()
     if form.validate_on_submit():
-        quote = Quotes(content = form.content.data, job = job_id)
+        quote = Quotes(content = form.content.data, job = job_id, contractor = current_user.user_id)
         db.session.add(quote)
         db.session.commit()
         flash("The quote has been added", "success")
@@ -497,7 +511,4 @@ def Add_quote(job_id):
 @login_required
 def Contractor(user_id):
     return redirect(url_for("home"))
-# @app.route("/new_issue")
-# def new_issue():
-#     form = IssueForm()
-#     if form.validate_on_submit():
+

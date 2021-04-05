@@ -19,12 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Tower/templates/Invite_contractor.html" afterDir="false" />
+    <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="Adding sending emails to">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tower/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/routes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tower/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/site.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/templates/Job.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Job.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/templates/Add_Quote.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Add_Quote.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +196,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616011246753</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Inviting Contractors to give quotes">
+      <created>1616014696439</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1616014696439</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -226,6 +232,7 @@
     <MESSAGE value="Password reset function" />
     <MESSAGE value="Spelling" />
     <MESSAGE value="Adding quotes to job initial commit." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding quotes to job initial commit." />
+    <MESSAGE value="Inviting Contractors to give quotes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Inviting Contractors to give quotes" />
   </component>
 </project>
