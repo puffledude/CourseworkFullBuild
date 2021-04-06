@@ -532,13 +532,14 @@ def Add_quote(job_id):
     form = Quote_Form()
     job = db.session.query(Jobs).filter(Jobs.job_id == job_id).first()
     issue = db.session.query(Issue).filter(Issue.issue_id == job.issue).first()
+    place = db.session.query(Properties).filter_by(property_id = issue.property_id)
     if form.validate_on_submit():
         quote = Quotes(content=form.content.data, job=job_id, contractor=current_user.user_id)
         db.session.add(quote)
         db.session.commit()
         flash("The quote has been added", "success")
         return redirect(url_for("home"))
-    return render_template("Add_Quote.html", form=form, job=job, issue=issue)
+    return render_template("Add_Quote.html", form=form, job=job, issue=issue, place=place)
 
 
 @app.route("/Approve_quote/<int:quote_id>", methods=["GET", "POST"])
@@ -567,4 +568,5 @@ def Approve_quote(quote_id):
 @app.route("/Contractor/<int:user_id>")
 @login_required
 def Contractor(user_id):
-    return redirect(url_for("home"))
+    contractor = db.session.query(User).filter_by(user_id = user_id).first()
+    return render_template("Contractor.html", contractor=contractor)
