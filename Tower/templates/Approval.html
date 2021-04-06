@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2 class="article-section">Approve Quote</h2>
+<p>Are you sure you wish to approve the following quote: </p>
+<p>{{quote.content}}</p>
+<p>This is an irreversible decision</p>
+<form method="POST" action="">
+        {{ form.hidden_tag() }}
+    <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+    </div>
+</form>
+
+
+{% endblock content %}

@@ -14,10 +14,13 @@
 
 <div class="content-section">
     <h2 class="article-title"> Quotes</h2>
-    {% for quote in quotes %}
+    {% for thing in quotes %}
         <div class="content-section">
-            <h3> {{quote.User.name}}</h3>
-            <p> {{quote.Quotes.content}} </p>
+            <h3> {{thing.User.name}}</h3>
+            <p> {{thing.Quotes.content}} </p>
+            {% if approved == False %}
+            <a class="btn btn-secondary btn-sm m-1" href="{{url_for('Approve_quote', quote_id = thing.Quotes.quote_id) }}">Approve Quote</a>
+            {% endif %}
         </div>
     {% endfor %}
 </div>

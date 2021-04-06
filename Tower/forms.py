@@ -185,6 +185,11 @@ class Quote_Form(FlaskForm):
     content = TextAreaField("Quote details")
     submit = SubmitField("Give Quote")
 
+class Approve_Form(FlaskForm):
+    submit = SubmitField("Approve Quote")
+
+
+
 # class UpdateAccountForm(FlaskForm):
 #     username = StringField("Username",
 #                            validators=[DataRequired(), Length(min=2, max=20)])
