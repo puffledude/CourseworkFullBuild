@@ -43,7 +43,7 @@
                     <h2><a class="article-title"href=" {{ url_for('Landlord', user_id= User.user_id) }}">{{User.name}}</a></h2>
                     <p>Phone number: {{User.phone_number}} <br> Email: {{User.email}}</p>
                     {%elif User.role == ('Contractor')%}
-                    <h2><a class="article-title"href=" {{ url_for('Contractor', user_id= User.user_id) }}">{{User.name}}</a></h2>
+                    <h2><a class="article-title"href=" {{ url_for('Contractor', user_id= User.user_id, page1=1, page2=1) }}">{{User.name}}</a></h2>
                     <p>Phone number: {{User.phone_number}} <br> Email: {{User.email}}</p>
                     {%else%}
                     <h2><a class="article-title"href=" {{ url_for('Admin', user_id= User.user_id) }}">{{User.name}}</a></h2>

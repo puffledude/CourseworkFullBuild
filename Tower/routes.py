@@ -43,7 +43,7 @@ def register():
         db.session.add(user)
         db.session.commit()  # Commits new entry to the database
         flash("The account has been created!", "success")
-        msg = Message("Registration", sender="noreply@Towercoursework.com", recipients=[user])
+        msg = Message("Registration", sender="noreply@Towercoursework.com", recipients=[user.email])
         msg.body = f''' Dear {user.name}
         You have been successfully registered to the Tower Estates online management system.
 With this you can register any issues you have with your property'''
@@ -83,6 +83,8 @@ def search_users():
         print(SearchData)
         return render_template("Search_Users.html", SearchData=SearchData, form=form)
     return render_template("Search_Users.html", title="Search Users", form=form)
+
+
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -332,7 +334,7 @@ def create_issue(property_id):
         db.session.commit()
         flash("Your issue has been opened", "success")
         landlord = db.session.query(User).filter(User.user_id == property.landlord_id).first()
-        msg = Message("New Issue", sender="noreply@Towercoursework.com", recipients=[landlord])
+        msg = Message("New Issue", sender="noreply@Towercoursework.com", recipients=[landlord.email])
         msg.body = f'''A new issue has been created at {property.address_line_1} {property.address_line_1}'''
         mail.send(msg)
         return redirect(url_for("home"))
@@ -532,7 +534,7 @@ def Add_quote(job_id):
     form = Quote_Form()
     job = db.session.query(Jobs).filter(Jobs.job_id == job_id).first()
     issue = db.session.query(Issue).filter(Issue.issue_id == job.issue).first()
-    place = db.session.query(Properties).filter_by(property_id = issue.property_id)
+    place = db.session.query(Properties).filter_by(property_id=issue.property_id)
     if form.validate_on_submit():
         quote = Quotes(content=form.content.data, job=job_id, contractor=current_user.user_id)
         db.session.add(quote)
@@ -561,6 +563,17 @@ def Approve_quote(quote_id):
     if form.validate_on_submit():
         quote.chosen = True
         db.session.commit()
+        issue = db.session.query(Issue).filter(Issue.issue_id == job.issue).first()
+        place = db.session.query(Properties).filter(Properties.property_id == issue.property_id).first()
+        contractor = db.session.query(User).filter(quote.contractor == User.user_id).first()
+        msg = Message("Your quote has been chosen", sender="noreply@Towercoursework.com", recipients=[contractor.email])
+        msg.body = f'''Your quote has been chosen for the following job:
+        {job.title}
+        {job.content}
+        The address is:
+        {place.address_line_1} {place.address_line_2}
+        {place.postcode}
+        '''
         return redirect(url_for("Job", job_id=job.job_id))
     return render_template("Approval.html", form=form, quote=quote)
 
@@ -568,5 +581,28 @@ def Approve_quote(quote_id):
 @app.route("/Contractor/<int:user_id>")
 @login_required
 def Contractor(user_id):
-    contractor = db.session.query(User).filter_by(user_id = user_id).first()
-    return render_template("Contractor.html", contractor=contractor)
+    if current_user.role == "Tenant" or current_user.role == "Landlord":
+        abort(403)
+    page = request.args.get("page", 1, type=int)
+    contractor = db.session.query(User).filter_by(user_id=user_id).first()
+    approved = db.session.query(Quotes, Jobs).outerjoin(Quotes, Jobs.job_id == Quotes.job).filter_by(
+        contractor=contractor.user_id).filter_by(chosen=True).filter(Jobs.closed == False).order_by(Quotes.created.desc())
+    approved_quotes = approved.paginate(page,  per_page=5)
+    approved_next = url_for("Contractor", user_id=user_id, page=approved_quotes.next_num)\
+        if approved_quotes.has_next else None
+    approved_prev = url_for("Contractor", user_id=user_id, page=approved_quotes.prev_num) \
+        if approved_quotes.has_prev else None
+    return render_template("Contractor.html", contractor=contractor,
+                           approved_quotes=approved_quotes, approved_next=approved_next, approved_prev=approved_prev)
+
+
+@app.route("/delete_issue/<int:issue_id>", methods=["GET", "POST"])
+@login_required
+def delete_issue(issue_id):
+    if current_user.role != "Admin":
+        return redirect(url_for("Issue_page", issue_id=issue_id))
+    issue = db.session.query(Issue).filter_by(issue_id=issue_id).first()
+    property =db.session.query(Properties).filter_by(property_id = issue.property_id).first()
+    db.session.delete(issue)
+    db.session.commit()
+    return redirect(url_for("all_issues"))

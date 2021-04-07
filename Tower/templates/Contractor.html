@@ -14,6 +14,17 @@
 </div>
 {% endif %}
 
+<div class="content-section">
+    <h2>Current Jobs</h2>
+    {% for quotes in approved_quotes.items %}
+    <div class="content-section">
+        <h2>{{quotes.Jobs.summary}}</h2>
+        <p>{{quotes.Quotes.content}}</p>
+    </div>
+    {% endfor %}
+    <a class="btn btn-secondary btn-sm m-1" href=" {{approved_prev}}">Previous page</a>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{approved_next}}">Next Page</a>
+</div>
 
 
 
