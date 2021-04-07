@@ -506,6 +506,7 @@ def reset_token(token):
 @app.route("/Job/<int:job_id>")
 @login_required
 def Job(job_id):
+    page = request.args.get("page", 1, type=int)
     job = db.session.query(Jobs).filter(Jobs.job_id == job_id).first()
     quotes = db.session.query(Quotes, User).outerjoin(Quotes, User.user_id == Quotes.contractor).filter(
         Quotes.job == job_id).all()
@@ -513,8 +514,13 @@ def Job(job_id):
     for quote in quotes:
         if quote.Quotes.chosen == True:
             approved = True
-
-    return render_template("Job.html", job=job, quotes=quotes, approved=approved)
+    data = db.session.query(Jobs_Notes).filter_by(job = job_id)
+    notes = data.paginate(page, per_page=5)
+    next_url = url_for("Job", page=notes.next_num) \
+        if notes.has_next else None
+    prev_url = url_for("Job", page=notes.prev_num) \
+        if notes.has_prev else None
+    return render_template("Job.html", title="Job page", job=job, quotes=quotes, approved=approved, notes=notes, next_url=next_url, prev_url=prev_url)
 
 
 @app.route("/Create_a_quote/<int:job_id>", methods=["GET", "POST"])
@@ -643,3 +649,14 @@ def contractor_all_quotes(user_id):
     prev_url = url_for("contractor_all_quotes", user_id=user_id, page=all_quotes.prev_num) \
         if all_quotes.has_prev else None
     return render_template("contractor_all_quotes.html", all_quotes=all_quotes, next_url=next_url, prev_url=prev_url)
+
+@app.route("/add_job_note.<int:job_id>", methods=["GET", "POST"])
+@login_required
+def add_job_note(job_id):
+    form = note_form()
+    if form.validate_on_submit():
+        note = Jobs_Notes(title=form.title.data, content=form.content.data, job=job_id)
+        db.session.add(note)
+        db.session.commit()
+        return redirect(url_for("Job", job_id=job_id))
+    return render_template("issue_note.html", form=form)

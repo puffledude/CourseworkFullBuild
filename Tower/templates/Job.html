@@ -13,7 +13,7 @@
 <a class="btn btn-secondary btn-sm m-1" href="{{url_for('Invite_contractor', job_id = job.job_id)}}">Invite a Contractor</a>
 
 <div class="content-section">
-    <h2 class="article-title"> Quotes</h2>
+    <h2 class="article-title">Quotes</h2>
     {% for thing in quotes %}
         <div class="content-section">
             <h3> {{thing.User.name}}</h3>
@@ -25,5 +25,26 @@
     {% endfor %}
 </div>
 
+<div class="content-section">
+    <h2 class="article-title">Notes: </h2>
+    {% for note in notes.items %}
+    <div class="content-section">
+        <h3>{{note.title}}</h3>
+        <p>{{note.content}}</p>
+    </div>
+    {%endfor%}
+</div>
+
+<div>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{next_url}}">Next Page</a>
+</div>
+
+<div>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{prev_url}}">Previous Page</a>
+</div>
+
+<div>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('add_job_note', job_id = job.job_id)}}">Add a note</a>
+</div>
 
 {% endblock content %}
