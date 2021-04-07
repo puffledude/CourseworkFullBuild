@@ -20,7 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Tower/templates/all_users.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/all_users.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tower/templates/contractor_all_quotes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/layout.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +119,7 @@
       <workItem from="1617785938554" duration="5294000" />
       <workItem from="1617799989317" duration="2000" />
       <workItem from="1617800966833" duration="10649000" />
-      <workItem from="1617823501702" duration="5018000" />
+      <workItem from="1617823501702" duration="6946000" />
     </task>
     <task id="LOCAL-00001" summary="Unfucked directory structure">
       <created>1615561325362</created>
@@ -279,7 +282,21 @@
       <option name="project" value="LOCAL" />
       <updated>1617829738788</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Fixed Error">
+      <created>1617829945784</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1617829945784</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Formatting">
+      <created>1617830134217</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1617830134217</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -323,16 +340,17 @@
     <MESSAGE value="Adding quotes to job initial commit." />
     <MESSAGE value="Inviting Contractors to give quotes" />
     <MESSAGE value="Creating quotes." />
-    <MESSAGE value="Formatting" />
     <MESSAGE value="Approving quotes and formatting." />
     <MESSAGE value="Basic contractor page added and other improvements." />
     <MESSAGE value="Contractor page improvements and issue deletion" />
     <MESSAGE value="View all users added" />
     <MESSAGE value="Contractor job page added" />
     <MESSAGE value="Contractor job reachable from contractor page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Contractor job reachable from contractor page" />
+    <MESSAGE value="Fixed Error" />
+    <MESSAGE value="Formatting" />
+    <option name="LAST_COMMIT_MESSAGE" value="Formatting" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CourseworkFullBuild$run.coverage" NAME="run Coverage Results" MODIFIED="1617829744578" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CourseworkFullBuild$run.coverage" NAME="run Coverage Results" MODIFIED="1617831862334" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

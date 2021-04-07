@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="article-title">
+    <h2>All given quotes</h2>
+</div>
+
+<div class="content-section">
+    {% for quotes in all_quotes.items %}
+    <div class="content-section">
+        <h2><a class="article-title" href="{{ url_for('contractor_job', job_id = quotes.Jobs.job_id)}}"> {{quotes.Jobs.summary}}</a></h2>
+        <p>{{quotes.Quotes.content}}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<a class="btn btn-secondary btn-sm m-1" href=" {{prev_url}}">Previous page</a>
+<a class="btn btn-secondary btn-sm m-1" href=" {{next_url}}">Next Page</a>
+
+{% endblock content %}

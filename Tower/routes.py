@@ -631,3 +631,15 @@ def contractor_job(job_id):
 
     return render_template("contractor_job.html", quote=quote, job=job, location=location, issue=issue,
                            landlord=landlord, occupants=occupants)
+
+@app.route("/contractor_all_quotes/<int:user_id>")
+@login_required
+def contractor_all_quotes(user_id):
+    page = request.args.get("page", 1, type=int)
+    quotes = db.session.query(Quotes,Jobs).outerjoin(Quotes, Jobs.job_id==Quotes.job).filter_by(contractor = user_id).order_by(Quotes.created.desc())
+    all_quotes = quotes.paginate(page, per_page=8)
+    next_url = url_for("contractor_all_quotes", user_id=user_id, page=all_quotes.next_num)\
+        if all_quotes.has_next else None
+    prev_url = url_for("contractor_all_quotes", user_id=user_id, page=all_quotes.prev_num) \
+        if all_quotes.has_prev else None
+    return render_template("contractor_all_quotes.html", all_quotes=all_quotes, next_url=next_url, prev_url=prev_url)
