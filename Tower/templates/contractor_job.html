@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="article-title">
+    <h2>Job details</h2>
+</div>
+
+<div class="content-section">
+    <p>Job summary: {{job.summary}}</p>
+    <p>Job details: {{job.content}}</p>
+</div>
+
+<div class="article-title">
+    <h2>Full issue</h2>
+</div>
+
+<div class="content-section">
+    <p>Issue summary: {{issue.summary}}</p>
+    <p>Issue details: {{issue.content}}</p>
+</div>
+
+<div class="article-title">
+    <h2>Location details</h2>
+</div>
+
+<div class="content-section">
+    <p>{{location.address_line_1}} {{location.address_line_2}}</p>
+    <p>Postcode: {{location.postcode}} </p>
+    <h2 class="article-title">Occupants</h2>
+    {%for tenants in occupants%}
+    <div class="content-section">
+        <p>Name: {{tenants.User.name}}</p>
+        <p>Phone number: {{tenants.User.phone_number}}</p>
+        <p>Email: {{tenants.User.email}}</p>
+    </div>
+    <br>
+    {%endfor%}
+    <h2 class="article-title">Landlord</h2>
+    <p>Name: {{landlord.name}}</p>
+    <p>Phone number: {{landlord.phone_number}}</p>
+    <p>Email: {{landlord.email}}</p>
+</div>
+
+<div class="content-section">
+    <h2> Quote given</h2>
+    <p>{{quote.content}}</p>
+</div>
+
+
+
+{% endblock content %}

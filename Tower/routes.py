@@ -91,7 +91,7 @@ def all_users():
         abort(403)  # Redirects to a 403 error
     page = request.args.get("page", 1, type=int)
     users = db.session.query(User).order_by(User.role.desc())
-    all = users.paginate(page, per_page=15)
+    all = users.paginate(page, per_page=8)
     next_url = url_for("all_users", page=all.next_num) \
         if all.has_next else None
     prev_url = url_for("all_users", page=all.prev_num) \
@@ -545,7 +545,7 @@ def Add_quote(job_id):
     form = Quote_Form()
     job = db.session.query(Jobs).filter(Jobs.job_id == job_id).first()
     issue = db.session.query(Issue).filter(Issue.issue_id == job.issue).first()
-    place = db.session.query(Properties).filter_by(property_id=issue.property_id)
+    place = db.session.query(Properties).filter_by(property_id=issue.property_id).first()
     if form.validate_on_submit():
         quote = Quotes(content=form.content.data, job=job_id, contractor=current_user.user_id)
         db.session.add(quote)
@@ -579,12 +579,14 @@ def Approve_quote(quote_id):
         contractor = db.session.query(User).filter(quote.contractor == User.user_id).first()
         msg = Message("Your quote has been chosen", sender="noreply@Towercoursework.com", recipients=[contractor.email])
         msg.body = f'''Your quote has been chosen for the following job:
-        {job.title}
+        {job.summary}
         {job.content}
         The address is:
         {place.address_line_1} {place.address_line_2}
         {place.postcode}
         '''
+        mail.send(msg)
+        flash("The Quote has been approved", "success")
         return redirect(url_for("Job", job_id=job.job_id))
     return render_template("Approval.html", form=form, quote=quote)
 
@@ -616,3 +618,16 @@ def delete_issue(issue_id):
     db.session.delete(issue)
     db.session.commit()
     return redirect(url_for("all_issues"))
+
+@app.route("/contractor_job/<int:job_id>")
+@login_required
+def contractor_job(job_id):
+    quote = db.session.query(Quotes).filter_by(job = job_id).first()
+    job = db.session.query(Jobs).filter_by(job_id = job_id).first()
+    issue= db.session.query(Issue).filter_by(issue_id = job.issue).first()
+    location = db.session.query(Properties).filter_by(property_id = issue.property_id).first()
+    landlord = db.session.query(User).filter_by(user_id = location.landlord_id).first()
+    occupants = db.session.query(User, Tenancies).outerjoin(Tenancies.occupants).filter(Tenancies.property_id == location.property_id)
+
+    return render_template("contractor_job.html", quote=quote, job=job, location=location, issue=issue,
+                           landlord=landlord, occupants=occupants)
