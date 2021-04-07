@@ -28,11 +28,9 @@
     <p>Postcode: {{location.postcode}} </p>
     <h2 class="article-title">Occupants</h2>
     {%for tenants in occupants%}
-    <div class="content-section">
-        <p>Name: {{tenants.User.name}}</p>
-        <p>Phone number: {{tenants.User.phone_number}}</p>
-        <p>Email: {{tenants.User.email}}</p>
-    </div>
+    <p>Name: {{tenants.User.name}}</p>
+    <p>Phone number: {{tenants.User.phone_number}}</p>
+    <p>Email: {{tenants.User.email}}</p>
     <br>
     {%endfor%}
     <h2 class="article-title">Landlord</h2>
