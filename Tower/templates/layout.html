@@ -97,6 +97,9 @@
                     <li class="list-group-item list-group-item-light"><a class="nav-item nav-link"
                                                                          href="{{ url_for('all_issues') }}">
                         View all open issues</a></li>
+                    <li class="list-group-item list-group-item-light"><a class="nav-item nav-link"
+                                                                         href="{{ url_for('all_users') }}">
+                        view all users</a></li>
                     {%elif current_user.role == ('Landlord') %}
                 <li class="list-group-item list-group-item-light"><a class<a class="nav-item nav-link" href="{{url_for('Landlord_issues')}}"> View all issues</a></li>
                     {%endif%}

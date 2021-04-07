@@ -84,8 +84,19 @@ def search_users():
         return render_template("Search_Users.html", SearchData=SearchData, form=form)
     return render_template("Search_Users.html", title="Search Users", form=form)
 
-
-
+@app.route("/all_users")
+@login_required
+def all_users():
+    if current_user.role != ("Admin"):  # Ensures only admins can use this route
+        abort(403)  # Redirects to a 403 error
+    page = request.args.get("page", 1, type=int)
+    users = db.session.query(User).order_by(User.role.desc())
+    all = users.paginate(page, per_page=15)
+    next_url = url_for("all_users", page=all.next_num) \
+        if all.has_next else None
+    prev_url = url_for("all_users", page=all.prev_num) \
+        if all.has_prev else None
+    return render_template("all_users.html", all=all, next_url=next_url, prev_url = prev_url)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -602,7 +613,6 @@ def delete_issue(issue_id):
     if current_user.role != "Admin":
         return redirect(url_for("Issue_page", issue_id=issue_id))
     issue = db.session.query(Issue).filter_by(issue_id=issue_id).first()
-    property =db.session.query(Properties).filter_by(property_id = issue.property_id).first()
     db.session.delete(issue)
     db.session.commit()
     return redirect(url_for("all_issues"))
