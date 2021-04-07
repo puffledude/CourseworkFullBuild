@@ -18,7 +18,11 @@
     <h2>Current Jobs</h2>
     {% for quotes in approved_quotes.items %}
     <div class="content-section">
+        {% if current_user.role == ('Admin') %}
+        <h2><a class="article-title" href="{{ url_for('Job', job_id = quotes.Jobs.job_id)}}"> {{quotes.Jobs.summary}}</a></h2>
+        {% else %}}
         <h2><a class="article-title" href="{{ url_for('contractor_job', job_id = quotes.Jobs.job_id)}}"> {{quotes.Jobs.summary}}</a></h2>
+        {% endif %}
         <p>{{quotes.Quotes.content}}</p>
     </div>
     {% endfor %}
@@ -26,6 +30,6 @@
     <a class="btn btn-secondary btn-sm m-1" href=" {{approved_next}}">Next Page</a>
 </div>
 
-
+<a class="btn btn-secondary btn-sm m-1" href=" {{url_for('contractor_all_quotes', user_id = contractor.user_id)}}">All Quotes </a>
 
 {% endblock content %}
