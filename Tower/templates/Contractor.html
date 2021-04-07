@@ -18,7 +18,7 @@
     <h2>Current Jobs</h2>
     {% for quotes in approved_quotes.items %}
     <div class="content-section">
-        <h2>{{quotes.Jobs.summary}}</h2>
+        <h2><a class="article-title" href="{{ url_for('contractor_job', job_id = quotes.Jobs.job_id)}}"> {{quotes.Jobs.summary}}</a></h2>
         <p>{{quotes.Quotes.content}}</p>
     </div>
     {% endfor %}
