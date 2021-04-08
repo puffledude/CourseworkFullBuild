@@ -8,7 +8,19 @@
 <div class="content-section">
     <p>Job summary: {{job.summary}}</p>
     <p>Job details: {{job.content}}</p>
+    <h2 class="article-title"> Notes</h2>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('add_job_note', job_id = job.job_id)}}">Add a note</a>
+    {%for note in notes.items%}
+    <div class="content-section">
+        <h3>Note</h3>
+        <h4>{{note.title}}</h4>
+        <p>{{note.content}}</p>
+    </div>
+    {%endfor%}
+    <a class="btn btn-secondary btn-sm m-1" href=" {{prev_url}}">Previous page</a>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{next_url}}">Next page</a>
 </div>
+
 
 <div class="article-title">
     <h2>Full issue</h2>

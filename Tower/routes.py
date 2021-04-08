@@ -635,15 +635,24 @@ def delete_issue(issue_id):
 @app.route("/contractor_job/<int:job_id>")
 @login_required
 def contractor_job(job_id):
+    page = request.args.get("page", 1, type=int)
     quote = db.session.query(Quotes).filter_by(job = job_id).first()
     job = db.session.query(Jobs).filter_by(job_id = job_id).first()
     issue= db.session.query(Issue).filter_by(issue_id = job.issue).first()
     location = db.session.query(Properties).filter_by(property_id = issue.property_id).first()
     landlord = db.session.query(User).filter_by(user_id = location.landlord_id).first()
+    job_notes= db.session.query(Jobs_Notes).filter(Jobs_Notes.job == job.job_id)
+    notes = job_notes.paginate(page, per_page=5)
+    next_url = url_for("contractor_job", page=notes.next_num) \
+        if notes.has_next else None
+    prev_url = url_for("contractor_job", page=notes.prev_num) \
+        if notes.has_prev else None
+
     occupants = db.session.query(User, Tenancies).outerjoin(Tenancies.occupants).filter(Tenancies.property_id == location.property_id)
 
     return render_template("contractor_job.html", quote=quote, job=job, location=location, issue=issue,
-                           landlord=landlord, occupants=occupants, title="Job")
+                           landlord=landlord, occupants=occupants, title="Job", next_url=next_url, prev_url=prev_url,
+                           notes=notes)
 
 @app.route("/contractor_all_quotes/<int:user_id>")
 @login_required
@@ -666,7 +675,10 @@ def add_job_note(job_id):
         note = Jobs_Notes(title=form.title.data, content=form.content.data, job=job_id)
         db.session.add(note)
         db.session.commit()
-        return redirect(url_for("Job", job_id=job_id))
+        if current_user.role != "Contractor":
+            return redirect(url_for("Job", job_id=job_id))
+        else:
+            return redirect(url_for("contractor_job", job_id=job_id))
     return render_template("issue_note.html", form=form, title="Add a job")
 
 @app.route("/delete_job_note/<int:note_id>", methods=["GET", "POST"])
