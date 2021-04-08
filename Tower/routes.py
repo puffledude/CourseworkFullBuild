@@ -5,7 +5,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from Tower.models import User, Properties, Tenancies, Issue, Issue_Notes, Jobs, Jobs_Notes, Quotes
 from Tower.forms import RegistrationForm, PropertiesForm, User_search_Form, LoginForm, IssueForm, New_tenancy_Form, \
     Property_search_Form, Add_Tenant_Form, Update_User_Form, Update_Contractor_Form, note_form, Update_Properties_form, \
-    Delete_Form, RequestResetForm, ResetPasswordForm, Invite_Form, Quote_Form, Approve_Form
+    Delete_Form, RequestResetForm, ResetPasswordForm, Invite_Form, Quote_Form, Approve_Form, Close_Form
 from flask_mail import Message
 
 
@@ -381,8 +381,11 @@ def all_issues():
 def Issue_page(issue_id):
     page = request.args.get("page", 1, type=int)
     issue = db.session.query(Issue).filter(Issue.issue_id == issue_id).first()
-    print(issue)
     jobs = db.session.query(Jobs).filter(Jobs.issue == issue_id).all()
+    completed =True
+    for all in jobs:
+        if  all.closed == False:
+            completed=False
     found_notes = db.session.query(Issue_Notes).filter(Issue_Notes.issue == Issue.issue_id).order_by(
         Issue_Notes.note_id.desc())
     notes = found_notes.paginate(page, per_page=5)
@@ -392,7 +395,7 @@ def Issue_page(issue_id):
         if notes.has_prev else None
     create_a_job = url_for("Create_Job", issue_id=issue_id)
     return render_template("Issue.html", title="Issue", issue=issue, notes=notes, next_url=next_url, prev_url=prev_url,
-                           create_a_job=create_a_job, jobs=jobs)
+                           create_a_job=create_a_job, jobs=jobs, completed=completed)
 
 
 @app.route("/Issue_note_page/<int:issue_id>", methods=["GET", "POST"])
@@ -710,3 +713,33 @@ def delete_issue_note(note_id):
         flash("The note has been successfully deleted", "success")
         return redirect(url_for("Issue_page", issue_id=issue.issue_id))
     return render_template("Delete_page.html",title="Delete Note", form=form)
+
+@app.route("/job_closing/<int:job_id>", methods=["GET", "POST"])
+@login_required
+def job_closing(job_id):
+    if current_user.role != "Admin":
+        abort(403)
+    job = db.session.query(Jobs).filter_by(job_id = job_id).first()
+    form = Close_Form()
+    if form.validate_on_submit():
+        issue = db.session.query(Issue).filter(Issue.issue_id == job.issue).first()
+        job.closed = True
+        db.session.commit()
+        flash("Job has been marked as complete", "success")
+        return redirect(url_for("Issue_page", issue_id=issue.issue_id))
+    return render_template("job_closing.html", form=form, job=job)
+
+
+@app.route("/issue_closing/<int:issue_id>", methods=["GET", "POST"])
+@login_required
+def issue_closing(issue_id):
+    if current_user.role != "Admin":
+        abort(403)
+    issue = db.session.query(Issue).filter_by(issue_id = issue_id).first()
+    form = Close_Form()
+    if form.validate_on_submit():
+        issue.closed = True
+        db.session.commit()
+        flash("Job has been marked as complete", "success")
+        return redirect(url_for("Issue_page", issue_id=issue.issue_id))
+    return render_template("issue_closing.html", form=form, issue=issue)

@@ -20,10 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Tower/templates/issue_closing.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tower/templates/job_closing.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tower/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/site.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/templates/contractor_job.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/contractor_job.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/templates/Issue.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Issue.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/templates/Job.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Job.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +76,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/run.py" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RunManager">
     <configuration name="run" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -121,7 +124,8 @@
       <workItem from="1617800966833" duration="10649000" />
       <workItem from="1617823501702" duration="10676000" />
       <workItem from="1617869431296" duration="3000" />
-      <workItem from="1617871212226" duration="7559000" />
+      <workItem from="1617871212226" duration="8180000" />
+      <workItem from="1617897259236" duration="6096000" />
     </task>
     <task id="LOCAL-00001" summary="Unfucked directory structure">
       <created>1615561325362</created>
@@ -340,7 +344,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617880665299</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Contractor note making">
+      <created>1617887384294</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1617887384294</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -369,7 +380,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Deletion warning page" />
     <MESSAGE value="Deletion and Updates on all user pages" />
     <MESSAGE value="Updating layouts" />
     <MESSAGE value="Creating a job is now functional" />
@@ -394,9 +404,10 @@
     <MESSAGE value="Resolution's initial commit" />
     <MESSAGE value="Deleting notes" />
     <MESSAGE value="Improved note deletion" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improved note deletion" />
+    <MESSAGE value="Contractor note making" />
+    <option name="LAST_COMMIT_MESSAGE" value="Contractor note making" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CourseworkFullBuild$run.coverage" NAME="run Coverage Results" MODIFIED="1617887165934" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CourseworkFullBuild$run.coverage" NAME="run Coverage Results" MODIFIED="1617904994593" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -188,7 +188,8 @@ class Quote_Form(FlaskForm):
 class Approve_Form(FlaskForm):
     submit = SubmitField("Approve Quote")
 
-
+class Close_Form(FlaskForm):
+    submit = SubmitField("Close")
 
 # class UpdateAccountForm(FlaskForm):
 #     username = StringField("Username",

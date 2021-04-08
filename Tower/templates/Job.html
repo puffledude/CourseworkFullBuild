@@ -10,7 +10,11 @@
     <p>{{job.content}}</p>
 </div>
 
+
+{% if approved == False %}
 <a class="btn btn-secondary btn-sm m-1" href="{{url_for('Invite_contractor', job_id = job.job_id)}}">Invite a Contractor</a>
+{% endif %}
+
 
 <div class="content-section">
     <h2 class="article-title">Quotes</h2>
@@ -21,12 +25,18 @@
             {% if approved == False %}
             <a class="btn btn-secondary btn-sm m-1" href="{{url_for('Approve_quote', quote_id = thing.Quotes.quote_id) }}">Approve Quote</a>
             {% endif %}
+            {% if thing.Quotes.chosen == True %}
+            <p>Quote approved</p>
+            {% endif %}
         </div>
     {% endfor %}
 </div>
 
 <div>
+    {%if job.closed == False%}
     <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('add_job_note', job_id = job.job_id)}}">Add a note</a>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('job_closing', job_id = job.job_id)}}">Close Job</a>
+    {% endif %}
 </div>
 
 <div class="content-section">
