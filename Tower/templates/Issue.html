@@ -57,6 +57,9 @@
         <div class="content-section">
             <h3 class="article-title">{{ note.title }} </h3>
             <p> {{note.content }}</p>
+            {% if current_user.role == ('Admin')%}
+            <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('delete_issue_note', note_id = note.note_id)}}">Delete note</a>
+            {%endif%}
         </div>
     {% endfor %}
 </div>

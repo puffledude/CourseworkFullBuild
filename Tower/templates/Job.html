@@ -25,12 +25,17 @@
     {% endfor %}
 </div>
 
+<div>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('add_job_note', job_id = job.job_id)}}">Add a note</a>
+</div>
+
 <div class="content-section">
     <h2 class="article-title">Notes: </h2>
     {% for note in notes.items %}
     <div class="content-section">
         <h3>{{note.title}}</h3>
         <p>{{note.content}}</p>
+        <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('delete_job_note', note_id = note.note_id)}}">Delete note</a>
     </div>
     {%endfor%}
 </div>
@@ -43,8 +48,6 @@
     <a class="btn btn-secondary btn-sm m-1" href=" {{prev_url}}">Previous Page</a>
 </div>
 
-<div>
-    <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('add_job_note', job_id = job.job_id)}}">Add a note</a>
-</div>
+
 
 {% endblock content %}
