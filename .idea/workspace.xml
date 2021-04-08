@@ -20,8 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Tower/Branch.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/Branch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/README.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +71,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/run.py" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
     <configuration name="run" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -120,7 +120,7 @@
       <workItem from="1617823501702" duration="10676000" />
       <workItem from="1617869431296" duration="3000" />
       <workItem from="1617871212226" duration="8180000" />
-      <workItem from="1617897259236" duration="6425000" />
+      <workItem from="1617897259236" duration="6674000" />
     </task>
     <task id="LOCAL-00001" summary="Unfucked directory structure">
       <created>1615561325362</created>
@@ -353,7 +353,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617906127942</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Removed flask security">
+      <created>1617906304145</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1617906304146</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,7 +389,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updating layouts" />
     <MESSAGE value="Creating a job is now functional" />
     <MESSAGE value="Job page html created" />
     <MESSAGE value="Job Route and button implemented" />
@@ -407,7 +413,8 @@
     <MESSAGE value="Improved note deletion" />
     <MESSAGE value="Contractor note making" />
     <MESSAGE value="Closing Jobs and issues" />
-    <option name="LAST_COMMIT_MESSAGE" value="Closing Jobs and issues" />
+    <MESSAGE value="Removed flask security" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed flask security" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CourseworkFullBuild$run.coverage" NAME="run Coverage Results" MODIFIED="1617906189048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
