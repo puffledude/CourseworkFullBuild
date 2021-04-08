@@ -629,11 +629,15 @@ def Contractor(user_id):
 @login_required
 def delete_issue(issue_id):
     if current_user.role != "Admin":
-        return redirect(url_for("Issue_page", issue_id=issue_id))
-    issue = db.session.query(Issue).filter_by(issue_id=issue_id).first()
-    db.session.delete(issue)
-    db.session.commit()
-    return redirect(url_for("all_issues"))
+        abort(403)
+    form = Delete_Form()
+    if form.validate_on_submit():
+        #return redirect(url_for("Issue_page", issue_id=issue_id))
+        issue = db.session.query(Issue).filter_by(issue_id=issue_id).first()
+        db.session.delete(issue)
+        db.session.commit()
+        return redirect(url_for("all_issues"))
+    return render_template("Delete_page.html", form=form)
 
 @app.route("/contractor_job/<int:job_id>")
 @login_required

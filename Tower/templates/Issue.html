@@ -3,10 +3,9 @@
 <div class="content-section">
     <h2> {{issue.summary}}</h2>
     <br>
-</div>
-<div class="content-section">
     <p> {{issue.content}}</p>
 </div>
+
 
 {% if current_user.role == ('Landlord') %}
     {% if issue.approved == False %}

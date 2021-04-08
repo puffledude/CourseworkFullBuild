@@ -10,7 +10,7 @@
     <div class="content-section">
         {% if current_user.role == ('Admin') %}
         <h2><a class="article-title" href="{{ url_for('Job', job_id = quotes.Jobs.job_id)}}"> {{quotes.Jobs.summary}}</a></h2>
-        {% else %}}
+        {% else %}
         <h2><a class="article-title" href="{{ url_for('contractor_job', job_id = quotes.Jobs.job_id)}}"> {{quotes.Jobs.summary}}</a></h2>
         {% endif %}
         <p>{{quotes.Quotes.content}}</p>
