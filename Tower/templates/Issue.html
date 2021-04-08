@@ -8,8 +8,6 @@
     <p> {{issue.content}}</p>
 </div>
 
-
-
 {% if current_user.role == ('Landlord') %}
     {% if issue.approved == False %}
     <div>
@@ -24,10 +22,10 @@
         <div>
             <a class="btn btn-secondary btn-sm m-1" href=" {{create_a_job}}">Create a Job</a>
             {% if completed == True %}
-            <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('issue_closing', issue_id = issue.issue_id)}}">Close Issue</a>
+                <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('issue_closing', issue_id = issue.issue_id)}}">Close Issue</a>
             {% endif %}
         </div>
-        {%endif%}}
+        {% endif %}
     {% endif %}
 {% endif %}
 

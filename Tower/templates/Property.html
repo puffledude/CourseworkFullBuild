@@ -33,7 +33,7 @@
     <h3>Issues</h3>
     {% for issue in issues %}
     <div class="content-section">
-        <h4>{{issue.summary}}</h4>
+        <h4><a class="article-title"href=" {{ url_for('Issue_page', issue_id = issue.issue_id) }}">{{issue.summary}}</a></h4>
         <p>{{issue.content}}</p>
         {%if issue.closed == True%}
         <p>Issue has been resolved</p>
