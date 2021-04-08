@@ -364,7 +364,7 @@ def all_issues():
     if current_user.role != ("Admin"):
         abort(403)
     page = request.args.get("page", 1, type=int)
-    query = db.session.query(Issue, Properties).outerjoin(Properties,
+    query = db.session.query(Issue, Properties).filter(Issue.closed == False).outerjoin(Properties,
                                                           Properties.property_id == Issue.property_id).order_by(
         Issue.issue_id.desc())
     issues = query.paginate(page, per_page=10)
