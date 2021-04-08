@@ -43,6 +43,9 @@
         <div class="content-section">
             <a class="article-title" href="{{ url_for('Job', job_id = job.job_id) }}"><h3> {{ job.summary }}</h3></a>
             <p>{{job.content}}</p>
+            {% if job.closed == True %}
+            <p>This job has been resolved</p>
+            {% endif %}
         </div>
     {% endfor %}
 </div>

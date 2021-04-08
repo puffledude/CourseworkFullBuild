@@ -272,11 +272,9 @@ def Property(property_id):
         filter(Properties.property_id == property_id).first()
     tenancy = db.session.query(Tenancies).filter(Tenancies.property_id == property_id).first()
     occupancies = db.session.query(User).outerjoin(Tenancies.occupants).filter(Tenancies.property_id == property_id)
-    # for users in tenancy.User:
-    # data = db.session.query(User).filter(users.user_id == User.user_id)
-    # occupancies = occupancies+data
+    issues = db.session.query(Issue).filter(Issue.property_id == property_id).order_by(Issue.opened.desc())
     return render_template("Property.html", title="Property", property=property, occupancies=occupancies,
-                           tenancy=tenancy)
+                           tenancy=tenancy, issues=issues)
 
 
 @app.route("/Delete_property/<int:property_id>")

@@ -29,5 +29,17 @@
     <p>Tenancy started: {{tenancy.start_date}}
 </div>
 
+<div class="content-section">
+    <h3>Issues</h3>
+    {% for issue in issues %}
+    <div class="content-section">
+        <h4>{{issue.summary}}</h4>
+        <p>{{issue.content}}</p>
+        {%if issue.closed == True%}
+        <p>Issue has been resolved</p>
+        {%endif%}
+    </div>
+    {%endfor%}
+</div>
 
 {% endblock content %}
