@@ -20,10 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Tower/templates/Delete_property.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tower/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/templates/Issue.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Issue.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/templates/Job.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Job.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/templates/Delete_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Delete_page.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +121,7 @@
       <workItem from="1617800966833" duration="10649000" />
       <workItem from="1617823501702" duration="10676000" />
       <workItem from="1617869431296" duration="3000" />
-      <workItem from="1617871212226" duration="3268000" />
+      <workItem from="1617871212226" duration="4609000" />
     </task>
     <task id="LOCAL-00001" summary="Unfucked directory structure">
       <created>1615561325362</created>
@@ -326,7 +326,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617877774407</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Deleting notes">
+      <created>1617879211334</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1617879211334</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -355,7 +362,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added issues link to sidebar" />
     <MESSAGE value="Deletion on Tenants" />
     <MESSAGE value="Deletion warning page" />
     <MESSAGE value="Deletion and Updates on all user pages" />
@@ -380,9 +386,10 @@
     <MESSAGE value="Redirection changes" />
     <MESSAGE value="Adding notes to jobs" />
     <MESSAGE value="Resolution's initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Resolution's initial commit" />
+    <MESSAGE value="Deleting notes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Deleting notes" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CourseworkFullBuild$run.coverage" NAME="run Coverage Results" MODIFIED="1617879122076" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CourseworkFullBuild$run.coverage" NAME="run Coverage Results" MODIFIED="1617880463860" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

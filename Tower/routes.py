@@ -280,8 +280,16 @@ def Property(property_id):
 @app.route("/Delete_property/<int:property_id>")
 @login_required
 def Delete_property(property_id):
-    pass
-
+    if current_user.role != ("Admin"):
+        abort(403)
+    form = Delete_Form()
+    place = db.session.query(Properties).filter(Properties.property_id == property_id).first()
+    if form.validate_on_submit():
+        db.session.delete(place)
+        db.session.commit()
+        flash("The property has been successfully deleted", "success")
+        return redirect(url_for("home"))
+    return render_template("Delete_page.html", form=form, title="Delete Property")
 
 @app.route("/Property_update/<int:property_id>", methods=["GET", "POST"])
 @login_required
@@ -556,7 +564,7 @@ def Add_quote(job_id):
         db.session.commit()
         flash("The quote has been added", "success")
         return redirect(url_for("home"))
-    return render_template("Add_Quote.html", form=form, job=job, issue=issue, place=place)
+    return render_template("Add_Quote.html", title="Add a quote", form=form, job=job, issue=issue, place=place)
 
 
 @app.route("/Approve_quote/<int:quote_id>", methods=["GET", "POST"])
@@ -592,7 +600,7 @@ def Approve_quote(quote_id):
         mail.send(msg)
         flash("The Quote has been approved", "success")
         return redirect(url_for("Job", job_id=job.job_id))
-    return render_template("Approval.html", form=form, quote=quote)
+    return render_template("Approval.html", title="Approve a quote", form=form, quote=quote)
 
 
 @app.route("/Contractor/<int:user_id>")
@@ -610,7 +618,8 @@ def Contractor(user_id):
     approved_prev = url_for("Contractor", user_id=user_id, page=approved_quotes.prev_num) \
         if approved_quotes.has_prev else None
     return render_template("Contractor.html", contractor=contractor,
-                           approved_quotes=approved_quotes, approved_next=approved_next, approved_prev=approved_prev)
+                           approved_quotes=approved_quotes, approved_next=approved_next, approved_prev=approved_prev,
+                           title="Contractor")
 
 
 @app.route("/delete_issue/<int:issue_id>", methods=["GET", "POST"])
@@ -634,7 +643,7 @@ def contractor_job(job_id):
     occupants = db.session.query(User, Tenancies).outerjoin(Tenancies.occupants).filter(Tenancies.property_id == location.property_id)
 
     return render_template("contractor_job.html", quote=quote, job=job, location=location, issue=issue,
-                           landlord=landlord, occupants=occupants)
+                           landlord=landlord, occupants=occupants, title="Job")
 
 @app.route("/contractor_all_quotes/<int:user_id>")
 @login_required
@@ -646,7 +655,8 @@ def contractor_all_quotes(user_id):
         if all_quotes.has_next else None
     prev_url = url_for("contractor_all_quotes", user_id=user_id, page=all_quotes.prev_num) \
         if all_quotes.has_prev else None
-    return render_template("contractor_all_quotes.html", all_quotes=all_quotes, next_url=next_url, prev_url=prev_url)
+    return render_template("contractor_all_quotes.html", all_quotes=all_quotes, next_url=next_url, prev_url=prev_url,
+                           title="Contractor quotes")
 
 @app.route("/add_job_note/<int:job_id>", methods=["GET", "POST"])
 @login_required
@@ -657,28 +667,34 @@ def add_job_note(job_id):
         db.session.add(note)
         db.session.commit()
         return redirect(url_for("Job", job_id=job_id))
-    return render_template("issue_note.html", form=form)
+    return render_template("issue_note.html", form=form, title="Add a job")
 
-@app.route("/delete_job_note/<int:note_id>")
+@app.route("/delete_job_note/<int:note_id>", methods=["GET", "POST"])
 @login_required
 def delete_job_note(note_id):
     if current_user.role != "Admin":
         abort(403)
-    note = db.session.query(Jobs_Notes).filter_by(note_id = note_id).first()
-    job = db.session.query(Jobs).filter(Jobs.job_id == note.job).first()
-    db.session.delete(note)
-    db.session.commit()
-    flash("The note has been successfully deleted")
-    return redirect(url_for("Job", job_id=job.job_id))
+    form = Delete_Form()
+    if form.validate_on_submit():
+        note = db.session.query(Jobs_Notes).filter_by(note_id = note_id).first()
+        job = db.session.query(Jobs).filter(Jobs.job_id == note.job).first()
+        db.session.delete(note)
+        db.session.commit()
+        flash("The note has been successfully deleted", "success")
+        return redirect(url_for("Job", job_id=job.job_id))
+    return render_template("Delete_page.html", title="Delete Note", form=form)
 
-@app.route("/delete_issue_note/<int:note_id>")
+@app.route("/delete_issue_note/<int:note_id>", methods=["GET", "POST"])
 @login_required
 def delete_issue_note(note_id):
     if current_user.role != "Admin":
         abort(403)
-    note = db.session.query(Issue_Notes).filter_by(note_id = note_id).first()
-    issue = db.session.query(Issue).filter(Issue.issue_id == note.issue).first()
-    db.session.delete(note)
-    db.session.commit()
-    flash("The note has been successfully deleted")
-    return redirect(url_for("Issue_page", issue_id=issue.issue_id))
+    form = Delete_Form()
+    if form.validate_on_submit():
+        note = db.session.query(Issue_Notes).filter_by(note_id = note_id).first()
+        issue = db.session.query(Issue).filter(Issue.issue_id == note.issue).first()
+        db.session.delete(note)
+        db.session.commit()
+        flash("The note has been successfully deleted", "success")
+        return redirect(url_for("Issue_page", issue_id=issue.issue_id))
+    return render_template("Delete_page.html",title="Delete Note", form=form)

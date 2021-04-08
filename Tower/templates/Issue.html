@@ -9,9 +9,6 @@
 </div>
 
 
-<div>
-    <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('Issue_note_page', issue_id=issue.issue_id) }}">Add a note</a>
-</div>
 
 {% if current_user.role == ('Landlord') %}
     {% if issue.approved == False %}
@@ -50,6 +47,9 @@
     {% endfor %}
 </div>
 
+<div>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('Issue_note_page', issue_id=issue.issue_id) }}">Add a note</a>
+</div>
 
 <div class="content-section">
     <h2 class="article-title">Notes: </h2>
