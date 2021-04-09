@@ -15,12 +15,12 @@ def home():
     return render_template("home.html")
 
 
-@app.errorhandler(404)
+@app.errorhandler(404) #If a 404 error is triggered
 def page_not_found(e):
     return render_template("404.html")
 
 
-@app.errorhandler(403)
+@app.errorhandler(403) #IF a 403 error is triggered
 def unauthorised(e):
     return render_template("403.html")
 
@@ -46,7 +46,8 @@ def register():
         msg = Message("Registration", sender="noreply@Towercoursework.com", recipients=[user.email])
         msg.body = f''' Dear {user.name}
         You have been successfully registered to the Tower Estates online management system.
-With this you can register any issues you have with your property'''
+With this you can register any issues you have with your property'''  # Body of email
+        mail.send(msg)  # Sends email
         return redirect(url_for("home"))
 
     return render_template("register.html", title="Register", form=form)  # Renders template for the user
@@ -67,8 +68,8 @@ def new_property():
         db.session.add(property)
         db.session.commit()
         flash("The property has been added!", "success")
-        return redirect(url_for("home"))
-    return render_template("new_property.html", title="New Property", form=form)
+        return redirect(url_for("home"))  # Redirects to home
+    return render_template("new_property.html", title="New Property", form=form)   # Renders the page
 
 
 @app.route("/search_users", methods=["GET", "POST"])
@@ -77,36 +78,38 @@ def search_users():
     if current_user.role != ("Admin"):  # Ensures only admins can use this route
         abort(403)  # Redirects to a 403 error
     form = User_search_Form()
-    if form.validate_on_submit():
+    if form.validate_on_submit():  # If the form is valid on submission
         SearchData = db.session.query(User).filter(
             User.name.like('%' + form.name.data + '%')).all()  # Queries the Searched Data
-        print(SearchData)
         return render_template("Search_Users.html", SearchData=SearchData, form=form)
-    return render_template("Search_Users.html", title="Search Users", form=form)
+    return render_template("Search_Users.html", title="Search Users", form=form)  # Renders the page
 
-@app.route("/all_users")
+
+@app.route("/all_users") # Output all users
 @login_required
 def all_users():
     if current_user.role != ("Admin"):  # Ensures only admins can use this route
         abort(403)  # Redirects to a 403 error
     page = request.args.get("page", 1, type=int)
-    users = db.session.query(User).order_by(User.role.desc())
-    all = users.paginate(page, per_page=8)
+    users = db.session.query(User).order_by(User.role.desc())  # Gets all users from the database
+    all = users.paginate(page, per_page=8)  # Paginates the query, allowing it to be shown over multiple pages
     next_url = url_for("all_users", page=all.next_num) \
-        if all.has_next else None
+        if all.has_next else None  # The url for the next page of users
     prev_url = url_for("all_users", page=all.prev_num) \
-        if all.has_prev else None
+        if all.has_prev else None  # The url for the previous page of users
     return render_template("all_users.html", all=all, next_url=next_url, prev_url = prev_url)
 
-@app.route("/login", methods=["GET", "POST"])
+
+@app.route("/login", methods=["GET", "POST"])  # Login page
 def login():
-    if current_user.is_authenticated:
+    if current_user.is_authenticated:  # Prevents user's logging in twice
         return redirect(url_for("home"))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user, remember=form.remember.data)
+        if user and bcrypt.check_password_hash(user.password, form.password.data):  # If the password on the form and
+            # the password recorded are equal
+            login_user(user, remember=form.remember.data)  # Logs in user
             flash("Login Successful", "success")
             return redirect(url_for("home"))
         else:
@@ -114,7 +117,7 @@ def login():
     return render_template("login.html", title="Login", form=form)
 
 
-@app.route("/logout")
+@app.route("/logout")  # Logs out users
 def logout():
     logout_user()
     return redirect(url_for("home"))
@@ -175,6 +178,9 @@ def add_tenant():
         flash("Tenant added", "success")
         return redirect(url_for("home"))
     return render_template("add_tenant.html", title="Add Tenant", form=form)
+
+
+
 
 
 @app.route("/search_properties", methods=["GET", "Post"])
@@ -694,8 +700,10 @@ def delete_job_note(note_id):
     if current_user.role != "Admin":
         abort(403)
     form = Delete_Form()
+    note = db.session.query(Jobs_Notes).filter_by(note_id=note_id).first()
+    if note not in locals():
+        abort(404)
     if form.validate_on_submit():
-        note = db.session.query(Jobs_Notes).filter_by(note_id = note_id).first()
         job = db.session.query(Jobs).filter(Jobs.job_id == note.job).first()
         db.session.delete(note)
         db.session.commit()
@@ -709,8 +717,10 @@ def delete_issue_note(note_id):
     if current_user.role != "Admin":
         abort(403)
     form = Delete_Form()
+    note = db.session.query(Issue_Notes).filter_by(note_id=note_id).first()
+    if note not in locals():
+        abort(404)
     if form.validate_on_submit():
-        note = db.session.query(Issue_Notes).filter_by(note_id = note_id).first()
         issue = db.session.query(Issue).filter(Issue.issue_id == note.issue).first()
         db.session.delete(note)
         db.session.commit()
