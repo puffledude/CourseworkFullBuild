@@ -143,12 +143,12 @@ def emergency():
 def new_tenancy():
     if current_user.role != "Admin":
         abort(403)
-    form = New_tenancy_Form()
-    current_tenancies = db.session.query(Tenancies.property_id)
-    properties = db.session.query(Properties).filter(Properties.property_id.notin_(current_tenancies))
+    form = New_tenancy_Form()  # Form used
+    current_tenancies = db.session.query(Tenancies.property_id)  # Gets property ids
+    properties = db.session.query(Properties).filter(Properties.property_id.notin_(current_tenancies))  # gets all properties not already linked to tenancies
     choice_list = [(i.property_id, i.address_line_1 + " " + i.address_line_2) for i in properties]
-    form.property.choices = choice_list
-    if form.validate_on_submit():
+    form.property.choices = choice_list  # Adds choices to choice list
+    if form.validate_on_submit():  # If the form is valid
         tenancy = Tenancies(property_id=form.property.data, start_date=form.start_date.data)
         db.session.add(tenancy)
         db.session.commit()
@@ -157,13 +157,13 @@ def new_tenancy():
     return render_template("new_tenancy.html", title="New Tenancy", form=form)
 
 
-@app.route("/add_tenant", methods=["GET", "POST"])
+@app.route("/add_tenant", methods=["GET", "POST"])  # Adds tenant to open Tenancy
 @login_required
 def add_tenant():
     if current_user.role != "Admin":
         abort(403)
     form = Add_Tenant_Form()
-    tenants = db.session.query(User).filter(User.role == "Tenant")
+    tenants = db.session.query(User).filter(User.role == "Tenant")  # Gets all Tenants
     tenant_choice_list = [(i.user_id, i.name) for i in tenants]
     form.Tenant.choices = tenant_choice_list
     locations = db.session.query(Tenancies, Properties).filter(Tenancies.property_id == Properties.property_id).all()
@@ -247,46 +247,48 @@ def Delete_user(user_id):
     return render_template("Delete_page.html", form=form)
 
 
-@app.route("/Update_User/<int:user_id>", methods=["GET", "POST"])  # Currently broken. Needs fixing
+@app.route("/Update_User/<int:user_id>", methods=["GET", "POST"])  # Updates a Users data
 @login_required
 def Update_User(user_id):
     if current_user.role != ("Admin"):
         abort(403)
     user = db.session.query(User).filter(User.user_id == user_id).first()
-    if user.role == ("Contractor"):
-        form = Update_Contractor_Form()
-        form.user_id.data = user.user_id
-        form.name.data = user.name
-        form.phone_number = user.phone_number
-        form.business_name = user.business
-        if form.validate_on_submit():
+    # if user.role == ("Contractor"):
+    #     form = Update_Contractor_Form()
+    #     form.user_id.data = user.user_id
+    #     form.name.data = user.name
+    #     form.phone_number = user.phone_number
+    #     form.business_name = user.business
+    #     if form.validate_on_submit():
+    #         if form.email.d
+    #         user.phone_number = form.email.data
+    #         user.name = form.name.data
+    #         flash("The user has been updated")
+    #         return redirect(url_for("home"))
+    #         db.session.commit()
+    #     elif request.method == "GET":
+    #         form.name.data = user.name  # Loads the users name into the form
+    #         form.phone_number.data = user.phone_number  # Loads the user's phone number into the form.
+    #         form.business_name = user.business  # Loads the user's business name into the form
+    #     return render_template("Update_Contractor.html", legend=("Update a User"), user=user, form=form)
+    # else:
+    form = Update_User_Form()  # Loads the form
+    if form.validate_on_submit():
+        if form.email.data:  # Only if an email is entered on the form, it is saved
             user.email = form.email.data
-            user.phone_number = form.email.data
-            user.name = form.name.data
-            flash("The user has been updated")
-            return redirect(url_for("home"))
-            db.session.commit()
-        elif request.method == "GET":
-            form.name.data = user.name  # Loads the users name into the form
-            form.phone_number.data = user.phone_number  # Loads the user's phone number into the form.
-            form.business_name = user.business  # Loads the user's business name into the form
-        return render_template("Update_Contractor.html", legend=("Update a User"), user=user, form=form)
-    else:
-        form = Update_User_Form()  # Loads the form
-        if form.validate_on_submit():
-            if form.email.data:  # Only if an email is entered on the form, it is saved
-                user.email = form.email.data
-            user.phone_number = form.phone_number.data  # Updates the data
-            user.name = form.name.data
-            db.session.commit()
-            print(user)
-            flash("The user has been updated", "success")
-            db.session.commit()
-            return redirect(url_for('home'))
-        elif request.method == "GET":  # If a GET request is received
-            form.name.data = user.name  # Loads the users name into the form
-            form.phone_number.data = user.phone_number  # Loads the user's phone number into the form.
-        return render_template("Update_User.html", legend=("Update a User"), user=user, form=form)
+        user.phone_number = form.phone_number.data  # Updates the data
+        user.business_name = form.business_name.data
+        user.name = form.name.data
+        db.session.commit()
+        print(user)
+        flash("The user has been updated", "success")
+        db.session.commit()
+        return redirect(url_for('home'))
+    elif request.method == "GET":  # If a GET request is received
+        form.name.data = user.name  # Loads the users name into the form
+        form.phone_number.data = user.phone_number  # Loads the user's phone number into the form.
+        form.business_name.data = user.business
+    return render_template("Update_User.html", legend=("Update a User"), user=user, form=form)
 
 
 @app.route("/Property/<int:property_id>", methods=["GET", "POST"])
@@ -563,7 +565,7 @@ def Invite_contractor(job_id):
         abort(403)
     form = Invite_Form()
     contractors = db.session.query(User).filter(User.role == ("Contractor")).all()
-    contractor_list = [(i.user_id, i.name) for i in contractors]
+    contractor_list = [(i.user_id, i.business) for i in contractors]
     form.contractor.choices = contractor_list
     if form.validate_on_submit():
         chosen = db.session.query(User).filter(User.user_id == form.contractor.data).first()

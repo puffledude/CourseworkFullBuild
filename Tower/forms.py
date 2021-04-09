@@ -54,6 +54,7 @@ class Update_User_Form(FlaskForm):
 
     email = StringField('Update Email', validators=[Optional(), Email()])
 
+    business_name = StringField("Business Name", validators=[DataRequired(), Length(max=170)])
 
 
     submit = SubmitField("Update User")

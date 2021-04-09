@@ -5,6 +5,7 @@
     <h2 class="account-heading"> {{ contractor.name }}</h2>
     <br>
     <p>Email: {{contractor.email}} <br> Phone number: {{contractor.phone_number}}</p>
+    <p>{{contractor.business}}</p>
 </div>
 
 {% if current_user.role == ('Admin') %}
