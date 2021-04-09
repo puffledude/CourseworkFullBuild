@@ -412,6 +412,9 @@ def all_issues():
 def Issue_page(issue_id):
     page = request.args.get("page", 1, type=int)
     issue = db.session.query(Issue).filter(Issue.issue_id == issue_id).first()
+    place = db.session.query(Properties).filter(Properties.property_id == issue.property_id).first()
+    place_url = url_for('Property', property_id=place.property_id)
+    print(place)
     jobs = db.session.query(Jobs).filter(Jobs.issue == issue_id).all()
     completed =True  # Checking if all jobs are completed
     for all in jobs:
@@ -426,7 +429,7 @@ def Issue_page(issue_id):
         if notes.has_prev else None
     create_a_job = url_for("Create_Job", issue_id=issue_id)
     return render_template("Issue.html", title="Issue", issue=issue, notes=notes, next_url=next_url, prev_url=prev_url,
-                           create_a_job=create_a_job, jobs=jobs, completed=completed)
+                           create_a_job=create_a_job, jobs=jobs, completed=completed, place=place, place_url=place_url)
 
 
 @app.route("/Issue_note_page/<int:issue_id>", methods=["GET", "POST"])  # Add a note to an issue

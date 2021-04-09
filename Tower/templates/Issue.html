@@ -7,6 +7,9 @@
 </div>
 
 
+<a class="btn btn-secondary btn-sm m-1" href="{{place_url}}">Related Location</a>
+
+
 {% if current_user.role == ('Landlord') %}
     {% if issue.approved == False %}
     <div>
@@ -19,7 +22,7 @@
     {%if issue.approved == True %}
         {%if issue.closed == False %}
         <div>
-            <a class="btn btn-secondary btn-sm m-1" href=" {{create_a_job}}">Create a Job</a>
+            <a class="btn btn-secondary btn-sm m-1" href="{{create_a_job}}">Create a Job</a>
             {% if completed == True %}
                 <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('issue_closing', issue_id = issue.issue_id)}}">Close Issue</a>
             {% endif %}
@@ -50,6 +53,7 @@
 
 <div>
     <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('Issue_note_page', issue_id=issue.issue_id) }}">Add a note</a>
+    <br>
 </div>
 
 <div class="content-section">
