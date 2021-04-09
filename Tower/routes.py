@@ -173,13 +173,13 @@ def add_tenant():
     if form.validate_on_submit():
         user = db.session.query(User).filter(User.user_id == form.Tenant.data).first()
         tenancy = db.session.query(Tenancies).filter(Tenancies.tenancy_id == form.Tenancy.data).first()
-        tenancy.occupants.append(user)
+        tenancy.occupants.append(user)  # Adds tenant to tenancy
         db.session.commit()
         flash("Tenant added", "success")
         return redirect(url_for("home"))
     return render_template("add_tenant.html", title="Add Tenant", form=form)
 
-@app.route("/remove_tenant/<int:user_id>/<int:property_id>", methods=["GET", "POST"])
+@app.route("/remove_tenant/<int:user_id>/<int:property_id>", methods=["GET", "POST"])  # Removes tenant from tenancy
 @login_required
 def remove_tenant(user_id, property_id):
     if current_user.role != "Admin":
@@ -194,14 +194,13 @@ def remove_tenant(user_id, property_id):
         if current is not None:
             found = True
     if found == False:
-        db.session.delete(tenancy)
+        db.session.delete(tenancy)  # If there is no one else left in the tenancy, it is deleted
         db.session.commit()
 
     return redirect(url_for("Property", property_id=property_id))
 
 
-
-@app.route("/search_properties", methods=["GET", "Post"])
+@app.route("/search_properties", methods=["GET", "Post"])  # Search properties
 @login_required
 def search_properties():
     if current_user.role != ("Admin"):
@@ -209,28 +208,28 @@ def search_properties():
     form = Property_search_Form()
     if form.validate_on_submit():
         SearchData = db.session.query(User, Properties).outerjoin(Properties, User.user_id == Properties.landlord_id). \
-            filter(Properties.address_line_1.like('%' + form.address_line_1.data + '%')).all()
+            filter(Properties.address_line_1.like('%' + form.address_line_1.data + '%')).all()  # Searches data
         return render_template("Search_Properties.html", SearchData=SearchData, form=form)
     return render_template("Search_Properties.html", title="Property Searching", form=form)
 
 
-@app.route("/Tenant/<int:user_id>")
+@app.route("/Tenant/<int:user_id>")  # Tenant Profile page
 @login_required
 def Tenant(user_id):
     if current_user.role != ("Admin") and current_user.user_id != user_id:
         abort(403)
-    users = db.session.query(User).filter(User.user_id == user_id).first()
+    users = db.session.query(User).filter(User.user_id == user_id).first()  # Tenants details
     if users.role != ("Tenant"):
         abort(404)
     tenancies = []
-    for tenancy in users.Tenancies:
+    for tenancy in users.Tenancies:  # Gets all places where  the Tenant is an occupant
         data = db.session.query(Properties, User).outerjoin(Properties, User.user_id == Properties.landlord_id). \
             filter(tenancy.property_id == Properties.property_id).all()
         tenancies = tenancies + data
     return render_template("Tenant.html", title="User Profile", users=users, tenancies=tenancies)
 
 
-@app.route("/Delete_user/<int:user_id>", methods=["GET", "POST"])
+@app.route("/Delete_user/<int:user_id>", methods=["GET", "POST"])  # Deletes a user
 @login_required
 def Delete_user(user_id):
     if current_user.role != ("Admin"):
@@ -291,42 +290,48 @@ def Update_User(user_id):
     return render_template("Update_User.html", legend=("Update a User"), user=user, form=form)
 
 
-@app.route("/Property/<int:property_id>", methods=["GET", "POST"])
+@app.route("/Property/<int:property_id>", methods=["GET", "POST"])  # The homepage for each property
 @login_required
 def Property(property_id):
     property = db.session.query(Properties, User).outerjoin(Properties, User.user_id == Properties.landlord_id). \
-        filter(Properties.property_id == property_id).first()
+        filter(Properties.property_id == property_id).first()  # Gets the properties details
     tenancy = db.session.query(Tenancies).filter(Tenancies.property_id == property_id).first()
-    occupancies = db.session.query(User).outerjoin(Tenancies.occupants).filter(Tenancies.property_id == property_id)
+    occupancies = db.session.query(User).outerjoin(Tenancies.occupants).filter(Tenancies.property_id == property_id)  # Gets all the occupants of a property
     issues = db.session.query(Issue).filter(Issue.property_id == property_id).order_by(Issue.opened.desc())
     return render_template("Property.html", title="Property", property=property, occupancies=occupancies,
                            tenancy=tenancy, issues=issues)
 
 
-@app.route("/Delete_property/<int:property_id>")
+@app.route("/Delete_property/<int:property_id>")  # Delete Property function
 @login_required
 def Delete_property(property_id):
     if current_user.role != ("Admin"):
         abort(403)
     form = Delete_Form()
-    place = db.session.query(Properties).filter(Properties.property_id == property_id).first()
+    place = db.session.query(Properties).filter(Properties.property_id == property_id).first()  # Gets property
     if form.validate_on_submit():
-        db.session.delete(place)
+        db.session.delete(place)  # Deletes property
         db.session.commit()
         flash("The property has been successfully deleted", "success")
         return redirect(url_for("home"))
     return render_template("Delete_page.html", form=form, title="Delete Property")
 
-@app.route("/Property_update/<int:property_id>", methods=["GET", "POST"])
+@app.route("/Property_update/<int:property_id>", methods=["GET", "POST"])  # Update Property function
 @login_required
 def Update_Property(property_id):
     if current_user.role != ("Admin"):
         abort(403)
-    form = Update_Properties_form()
     landlords = db.session.query(User).filter(User.role == "Landlord")
     landlord_list = [(i.user_id, i.name) for i in landlords]
-    form.Landlord.choices = landlord_list  # Fills in the landlord choices box
+    landlord = db.session.query(User).filter(User.user_id == Properties.landlord_id).first()
+    form = Update_Properties_form()
     property = db.session.query(Properties).filter(Properties.property_id == property_id).first()
+
+    form.Landlord.choices = landlord_list  # Fills in the landlord choices box
+
+
+
+
     if form.validate_on_submit():
         property.address_line_1 = form.address_line_1.data
         property.address_line_2 = form.address_line_2.data
@@ -334,19 +339,19 @@ def Update_Property(property_id):
         db.session.commit()
         flash("The property has been updated!", "success")
         return redirect(url_for("home"))
-    elif request.method == "GET":
-        form.Landlord.data = property.landlord_id
+    elif request.method == "GET":  # Fills in the choices
+        form.Landlord.default = property.landlord_id
+        form.process()
         form.postcode.data = property.postcode
         form.address_line_1.data = property.address_line_1
         form.address_line_2.data = property.address_line_2
     return render_template("Update_Property.html", title="New Property", form=form)
 
 
-@app.route("/Landlord/<int:user_id>")
-@login_required
+@app.route("/Landlord/<int:user_id>")  # Profile page for landlords
+@login_required  # Login required
 def Landlord(user_id):
-    landlord = db.session.query(User).filter(User.user_id == user_id).first()
-    print(current_user)
+    landlord = db.session.query(User).filter(User.user_id == user_id).first()  # Get's landlord's details
     if landlord.role != ("Landlord"):
         abort(404)
     if current_user.role != ("Admin") and current_user.user_id != user_id:
@@ -355,18 +360,18 @@ def Landlord(user_id):
     return render_template("Landlord.html", title="User Profile", landlord=landlord, properties=properties)
 
 
-@app.route("/Admin/<int:user_id>")
+@app.route("/Admin/<int:user_id>")  # Admin page
 @login_required
 def Admin(user_id):
     if current_user.role != ("Admin"):
         abort(403)
-    user = db.session.query(User).filter(User.user_id == user_id).first()
+    user = db.session.query(User).filter(User.user_id == user_id).first()  # Gets user's details
     if user.role != ("Admin"):
         abort(404)
     return render_template("Admin.html", title="User Profile", user=user)
 
 
-@app.route("/create_issue/<int:property_id>", methods=["GET", "POST"])
+@app.route("/create_issue/<int:property_id>", methods=["GET", "POST"])  # Creates a new issue
 @login_required
 def create_issue(property_id):
     form = IssueForm()
@@ -377,19 +382,19 @@ def create_issue(property_id):
         db.session.commit()
         flash("Your issue has been opened", "success")
         landlord = db.session.query(User).filter(User.user_id == property.landlord_id).first()
-        msg = Message("New Issue", sender="noreply@Towercoursework.com", recipients=[landlord.email])
-        msg.body = f'''A new issue has been created at {property.address_line_1} {property.address_line_1}'''
-        mail.send(msg)
+        msg = Message("New Issue", sender="noreply@Towercoursework.com", recipients=[landlord.email])  # Creates email
+        msg.body = f'''A new issue has been created at {property.address_line_1} {property.address_line_1}'''  # Email text
+        mail.send(msg)  # Sends email
         return redirect(url_for("home"))
     return render_template("create_issue.html", title="Create an issue", form=form)
 
 
-@app.route("/all_issues")
+@app.route("/all_issues")  # Outputs all issues
 @login_required
 def all_issues():
     if current_user.role != ("Admin"):
         abort(403)
-    page = request.args.get("page", 1, type=int)
+    page = request.args.get("page", 1, type=int)  # Page for pagination
     query = db.session.query(Issue, Properties).filter(Issue.closed == False).outerjoin(Properties,
                                                           Properties.property_id == Issue.property_id).order_by(
         Issue.issue_id.desc())
@@ -402,13 +407,13 @@ def all_issues():
                            prev_url=prev_url, page=page)
 
 
-@app.route("/Issue_page/<int:issue_id>")
+@app.route("/Issue_page/<int:issue_id>")  # Homepage for issue
 @login_required
 def Issue_page(issue_id):
     page = request.args.get("page", 1, type=int)
     issue = db.session.query(Issue).filter(Issue.issue_id == issue_id).first()
     jobs = db.session.query(Jobs).filter(Jobs.issue == issue_id).all()
-    completed =True
+    completed =True  # Checking if all jobs are completed
     for all in jobs:
         if  all.closed == False:
             completed=False
@@ -424,13 +429,13 @@ def Issue_page(issue_id):
                            create_a_job=create_a_job, jobs=jobs, completed=completed)
 
 
-@app.route("/Issue_note_page/<int:issue_id>", methods=["GET", "POST"])
+@app.route("/Issue_note_page/<int:issue_id>", methods=["GET", "POST"])  # Add a note to an issue
 @login_required
 def Issue_note_page(issue_id):
     form = note_form()
     if form.validate_on_submit():
         note = Issue_Notes(issue=issue_id, title=form.title.data, content=form.content.data)
-        db.session.add(note)
+        db.session.add(note)  # Adds the note to the database
         db.session.commit()
         flash("Note creation successful", "success")
         return redirect(url_for("home"))
@@ -439,15 +444,15 @@ def Issue_note_page(issue_id):
 
 @app.route("/Landlord_Issues")
 @login_required
-def Landlord_issues():
+def Landlord_issues():  # Outputs all issues relevant to a landlord
     if current_user.role != ("Landlord"):
         abort(403)
     page = request.args.get("page", 1, type=int)
     query = db.session.query(Issue, Properties).outerjoin(Properties,
                                                           Properties.property_id == Issue.property_id).filter(
         Properties.landlord_id == current_user.user_id). \
-        order_by(Issue.issue_id.desc())
-    issues = query.paginate(page, per_page=10)
+        order_by(Issue.issue_id.desc())  # Queries issues and the properties they are attached to
+    issues = query.paginate(page, per_page=10)  # Paginates the query
     next_url = url_for("all_issues", page=issues.next_num) \
         if issues.has_next else None
     prev_url = url_for("all_issues", page=issues.prev_num) \
@@ -457,7 +462,7 @@ def Landlord_issues():
                            prev_url=prev_url, page=page)
 
 
-@app.route("/Approve_issue/<int:issue_id>")
+@app.route("/Approve_issue/<int:issue_id>")  # Used to approve an issue for work
 @login_required
 def Approve_issue(issue_id):
     if current_user.role != "Landlord":
@@ -469,7 +474,7 @@ def Approve_issue(issue_id):
         issue = db.session.query(Issue).filter(Issue.issue_id == issue_id).first()
         issue.approved = True
         db.session.commit()
-        flash("Work has been authorized")
+        flash("Work has been authorized", "success")
         return redirect(url_for('Issue_page', issue_id=issue_id))
     else:
         flash("You do not have the power to authorize approval", "Failure")
