@@ -20,9 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tower/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/templates/Issue.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Issue.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +122,7 @@
       <workItem from="1617897259236" duration="8036000" />
       <workItem from="1617916350979" duration="2997000" />
       <workItem from="1617920192089" duration="4000" />
-      <workItem from="1617962698518" duration="24316000" />
+      <workItem from="1617962698518" duration="24677000" />
     </task>
     <task id="LOCAL-00001" summary="Unfucked directory structure">
       <created>1615561325362</created>
@@ -420,7 +418,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618006275907</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Linking from an issue to a Property">
+      <created>1618007946420</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1618007946420</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -449,7 +454,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Approving quotes and formatting." />
     <MESSAGE value="Basic contractor page added and other improvements." />
     <MESSAGE value="Contractor page improvements and issue deletion" />
     <MESSAGE value="View all users added" />
@@ -474,7 +478,8 @@
     <MESSAGE value="Fixed User updating" />
     <MESSAGE value="Updating Property function fixups" />
     <MESSAGE value="View all properties" />
-    <option name="LAST_COMMIT_MESSAGE" value="View all properties" />
+    <MESSAGE value="Linking from an issue to a Property" />
+    <option name="LAST_COMMIT_MESSAGE" value="Linking from an issue to a Property" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CourseworkFullBuild$run.coverage" NAME="run Coverage Results" MODIFIED="1618007610312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

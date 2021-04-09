@@ -414,7 +414,6 @@ def Issue_page(issue_id):
     issue = db.session.query(Issue).filter(Issue.issue_id == issue_id).first()
     place = db.session.query(Properties).filter(Properties.property_id == issue.property_id).first()
     place_url = url_for('Property', property_id=place.property_id)
-    print(place)
     jobs = db.session.query(Jobs).filter(Jobs.issue == issue_id).all()
     completed =True  # Checking if all jobs are completed
     for all in jobs:
@@ -468,7 +467,7 @@ def Landlord_issues():  # Outputs all issues relevant to a landlord
 @app.route("/Approve_issue/<int:issue_id>")  # Used to approve an issue for work
 @login_required
 def Approve_issue(issue_id):
-    if current_user.role != "Landlord":
+    if current_user.role != "Landlord":  # Only Landlord's can approve work
         abort(403)
     properties = db.session.query(Properties, Issue).outerjoin(Properties,
                                                                Properties.property_id == Issue.property_id).filter(
@@ -478,13 +477,13 @@ def Approve_issue(issue_id):
         issue.approved = True
         db.session.commit()
         flash("Work has been authorized", "success")
-        return redirect(url_for('Issue_page', issue_id=issue_id))
+        return redirect(url_for('Issue_page', issue_id=issue_id))  # Return to the issue's page
     else:
         flash("You do not have the power to authorize approval", "Failure")
         return redirect(url_for("home"))
 
 
-@app.route("/Create_Job/<int:issue_id>", methods=["POST", "GET"])
+@app.route("/Create_Job/<int:issue_id>", methods=["POST", "GET"])  # Creates a Job
 @login_required
 def Create_Job(issue_id):
     if current_user.role != ("Admin"):
@@ -497,14 +496,14 @@ def Create_Job(issue_id):
         issue = db.session.query(Issue).filter(Issue.issue_id == issue_id).first()
         property = db.session.query(Properties).filter(Properties.property_id == issue.property_id).first()
         landlord = db.session.query(User).filter(User.user_id == property.landlord_id).first()
-        msg = Message("New Job", sender="noreply@Towercoursework.com", recipients=[landlord.email])
+        msg = Message("New Job", sender="noreply@Towercoursework.com", recipients=[landlord.email])  # Creates email
         msg.body = f'''A new job has been made for an issue at {property.address_line_1} {property.address_line_2}'''
-        mail.send(msg)
+        mail.send(msg)  # Sends email
         return redirect(url_for('Issue_page', issue_id=issue_id))
     return render_template("add_job.html", form=form, legend=("Create a Job"), title=("Create a Job"))
 
 
-def send_reset_email(user):
+def send_reset_email(user):  # Used to generate and send password reset links
     token = user.get_reset_token()
     msg = Message("Password Reset Request", sender="noreply@Towercoursework.com",
                   recipients=[user.email])
@@ -546,14 +545,14 @@ def reset_token(token):
     return render_template("reset_token.html", title="Reset Password", form=form)
 
 
-@app.route("/Job/<int:job_id>")
+@app.route("/Job/<int:job_id>")  # Job page
 @login_required
 def Job(job_id):
     page = request.args.get("page", 1, type=int)
     job = db.session.query(Jobs).filter(Jobs.job_id == job_id).first()
     quotes = db.session.query(Quotes, User).outerjoin(Quotes, User.user_id == Quotes.contractor).filter(
         Quotes.job == job_id).all()
-    approved = False
+    approved = False  # Checks if any quotes have been approved already
     for quote in quotes:
         if quote.Quotes.chosen == True:
             approved = True
@@ -566,15 +565,15 @@ def Job(job_id):
     return render_template("Job.html", title="Job page", job=job, quotes=quotes, approved=approved, notes=notes, next_url=next_url, prev_url=prev_url)
 
 
-@app.route("/Create_a_quote/<int:job_id>", methods=["GET", "POST"])
+@app.route("/Create_a_quote/<int:job_id>", methods=["GET", "POST"])  # Invites contractors
 @login_required
 def Invite_contractor(job_id):
     if current_user.role != ("Admin"):
         abort(403)
     form = Invite_Form()
-    contractors = db.session.query(User).filter(User.role == ("Contractor")).all()
-    contractor_list = [(i.user_id, i.business) for i in contractors]
-    form.contractor.choices = contractor_list
+    contractors = db.session.query(User).filter(User.role == ("Contractor")).all()  # List of contractors
+    contractor_list = [(i.user_id, i.business) for i in contractors]  # Formats the list of contractors
+    form.contractor.choices = contractor_list  # Adds the list to the choices on the form
     if form.validate_on_submit():
         chosen = db.session.query(User).filter(User.user_id == form.contractor.data).first()
         msg = Message("Job Invite", sender="noreply@Towercoursework.com", recipients=[chosen.email])
