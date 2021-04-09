@@ -138,7 +138,7 @@ def emergency():
     return render_template("register.html", title="Register", form=form)  # Renders template for the user
 
 
-@app.route("/new_tenancy", methods=["GET", "POST"])
+@app.route("/new_tenancy", methods=["GET", "POST"])  # Creates a new open tenancy on a property
 @login_required
 def new_tenancy():
     if current_user.role != "Admin":
@@ -179,7 +179,25 @@ def add_tenant():
         return redirect(url_for("home"))
     return render_template("add_tenant.html", title="Add Tenant", form=form)
 
+@app.route("/remove_tenant/<int:user_id>/<int:property_id>", methods=["GET", "POST"])
+@login_required
+def remove_tenant(user_id, property_id):
+    if current_user.role != "Admin":
+        abort(403)
+    user = db.session.query(User).filter_by(user_id=user_id).first()
+    tenancy = db.session.query(Tenancies).filter_by(property_id=property_id).first()
+    tenancy.occupants.remove(user)
+    db.session.commit()
+    found = False
+    for current in tenancy.occupants:
+        print(current)
+        if current is not None:
+            found = True
+    if found == False:
+        db.session.delete(tenancy)
+        db.session.commit()
 
+    return redirect(url_for("Property", property_id=property_id))
 
 
 

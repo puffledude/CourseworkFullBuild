@@ -23,6 +23,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tower/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/routes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tower/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/site.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/templates/Property.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Property.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +125,7 @@
       <workItem from="1617897259236" duration="8036000" />
       <workItem from="1617916350979" duration="2997000" />
       <workItem from="1617920192089" duration="4000" />
-      <workItem from="1617962698518" duration="1845000" />
+      <workItem from="1617962698518" duration="5122000" />
     </task>
     <task id="LOCAL-00001" summary="Unfucked directory structure">
       <created>1615561325362</created>
@@ -385,7 +386,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617917172351</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Comments and fixups">
+      <created>1617964611703</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1617964611703</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -414,7 +422,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Password reset function" />
     <MESSAGE value="Spelling" />
     <MESSAGE value="Adding quotes to job initial commit." />
     <MESSAGE value="Inviting Contractors to give quotes" />
@@ -439,9 +446,10 @@
     <MESSAGE value="Updated README.txt" />
     <MESSAGE value="Links to issues in Property.html" />
     <MESSAGE value="Formatting and fixups" />
-    <option name="LAST_COMMIT_MESSAGE" value="Formatting and fixups" />
+    <MESSAGE value="Comments and fixups" />
+    <option name="LAST_COMMIT_MESSAGE" value="Comments and fixups" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CourseworkFullBuild$run.coverage" NAME="run Coverage Results" MODIFIED="1617964425514" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CourseworkFullBuild$run.coverage" NAME="run Coverage Results" MODIFIED="1617966257444" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

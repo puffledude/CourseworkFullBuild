@@ -25,6 +25,7 @@
     <h3> Current Occupants: </h3>
     {% for current in occupancies %}
     <p> <a class="article-title"href=" {{ url_for('Tenant', user_id= current.user_id) }}">{{current.name}}</a></p>
+    <a class="btn btn-secondary btn-sm m-1" href="{{url_for('remove_tenant', property_id =property.Properties.property_id, user_id= current.user_id) }} ">Remove Tenant</a>
     {% endfor %}
     <p>Tenancy started: {{tenancy.start_date}}
 </div>
