@@ -782,3 +782,18 @@ def issue_closing(issue_id):
         flash("Job has been marked as complete", "success")
         return redirect(url_for("Issue_page", issue_id=issue.issue_id))
     return render_template("issue_closing.html", form=form, issue=issue)
+
+@app.route("/all_properties")
+@login_required
+def all_properties():
+    if current_user.role != "Admin":
+        abort(403)
+    page = request.args.get("page", 1, type=int)
+    all_places = db.session.query(Properties, User).outerjoin(Properties, User.user_id == Properties.landlord_id).filter(Properties.landlord_id == User.user_id).order_by(Properties.property_id.desc())
+    places = all_places.paginate(page, per_page=8)
+    print(places)
+    next_url = url_for("all_properties", page=places.next_num) \
+        if places.has_next else None
+    prev_url = url_for("all_properties", page=places.prev_num) \
+        if places.has_prev else None
+    return render_template("all_properties.html", places=places, prev_url=prev_url, next_url=next_url)

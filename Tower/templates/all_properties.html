@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <h2>All Properties</h2>
+</div>
+
+<div class="content-section">
+    {% for items in places.items %}
+    <div class="content-section">
+        <h3><a class="article-title" href=" {{ url_for('Property', property_id= items.Properties.property_id) }}">{{items.Properties.address_line_1}} {{items.Properties.address_line_2}}</a></h3>
+        <p>Postcode: {{items.Properties.postcode}}</p>
+        <p><a class="article-title" href=" {{ url_for('Landlord', user_id= items.User.user_id) }}">Landlord: {{items.User.name}}</a></p>
+    </div>
+    {%endfor%}
+</div>
+
+<div>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{next_url}}">Next Page</a>
+</div>
+
+<div>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{prev_url}}">Previous Page</a>
+</div>
+
+{% endblock content %}
