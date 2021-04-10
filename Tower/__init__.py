@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail
 
+#Initialisation file used to initialise the system
+
 app= Flask(__name__)
 app.config["SECRET_KEY"] = '800d270989386fa829183328fd42b69a'
 bcrypt = Bcrypt(app)
