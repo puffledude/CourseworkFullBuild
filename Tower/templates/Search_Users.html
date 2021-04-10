@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+{# Area where searchdata is inputted #}
     <div class="content-section">
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
@@ -30,13 +31,14 @@
             </form>
     </div>
 
+{# Area where searchdata is outputted #}
     <article class="media content-section">
         <div class="media-body">
             <div class="article-metadata">
                 <a class="mr-2">Search for Users</a>
             </div>
             {% for User in SearchData %}
-                    {%if User.role == ('Tenant')%}
+                    {%if User.role == ('Tenant')%} {#Ensures a user is sent to the right role page #}
                     <h2><a class="article-title"href=" {{ url_for('Tenant', user_id= User.user_id) }}">{{User.name}}</a></h2>
                     <p>Phone number: {{User.phone_number}} <br> Email: {{User.email}}</p>
                     {%elif User.role == ('Landlord')%}

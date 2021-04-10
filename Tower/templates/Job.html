@@ -11,21 +11,21 @@
 </div>
 
 
-{% if approved == False %}
+{% if approved == False %} {# Only allow for quote sending if one hasn't already been approved #}
 <a class="btn btn-secondary btn-sm m-1" href="{{url_for('Invite_contractor', job_id = job.job_id)}}">Invite a Contractor</a>
 {% endif %}
 
 
 <div class="content-section">
     <h2 class="article-title">Quotes</h2>
-    {% for thing in quotes %}
+    {% for thing in quotes %} {# Outputs all the quotes for a job #}
         <div class="content-section">
             <h3> {{thing.User.name}}</h3>
             <p> {{thing.Quotes.content}} </p>
             {% if approved == False %}
             <a class="btn btn-secondary btn-sm m-1" href="{{url_for('Approve_quote', quote_id = thing.Quotes.quote_id) }}">Approve Quote</a>
             {% endif %}
-            {% if thing.Quotes.chosen == True %}
+            {% if thing.Quotes.chosen == True %} {# If a job is chosen then output it is #}
             <p>Quote approved</p>
             {% endif %}
         </div>

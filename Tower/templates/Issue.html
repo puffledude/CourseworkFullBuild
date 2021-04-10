@@ -40,7 +40,7 @@
 
 <div class="content-section">
     <h2 class="article-title">Jobs</h2>
-    {% for job in jobs %}
+    {% for job in jobs %} {#OUtputs all jobs created for an issue#}
         <div class="content-section">
             <a class="article-title" href="{{ url_for('Job', job_id = job.job_id) }}"><h3> {{ job.summary }}</h3></a>
             <p>{{job.content}}</p>
@@ -58,7 +58,7 @@
 
 <div class="content-section">
     <h2 class="article-title">Notes: </h2>
-    {% for note in notes.items %}
+    {% for note in notes.items %}  {#Outputs all notes created for an issue#}
         <div class="content-section">
             <h3 class="article-title">{{ note.title }} </h3>
             <p> {{note.content }}</p>

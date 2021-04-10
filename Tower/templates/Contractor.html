@@ -10,14 +10,14 @@
 
 {% if current_user.role == ('Admin') %}
 <div>
-    <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('Update_User', user_id = contractor.user_id) }}">Update User</a>
-    <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('Delete_user', user_id = contractor.user_id) }}">Delete User</a>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('Update_User', user_id = contractor.user_id) }}">Update User</a>  {# Link to page that allows for the user to be updated #}
+    <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('Delete_user', user_id = contractor.user_id) }}">Delete User</a> {#Link to page that allows for the user to be deleted #}
 </div>
 {% endif %}
 
 <div class="content-section">
     <h2>Current Jobs</h2>
-    {% for quotes in approved_quotes.items %}
+    {% for quotes in approved_quotes.items %}  {# Outputs all the users approved quotes #}
     <div class="content-section">
         {% if current_user.role == ('Admin') %}
         <h2><a class="article-title" href="{{ url_for('Job', job_id = quotes.Jobs.job_id)}}"> {{quotes.Jobs.summary}}</a></h2>
@@ -31,6 +31,6 @@
     <a class="btn btn-secondary btn-sm m-1" href=" {{approved_next}}">Next Page</a>
 </div>
 
-<a class="btn btn-secondary btn-sm m-1" href=" {{url_for('contractor_all_quotes', user_id = contractor.user_id)}}">All Quotes </a>
+<a class="btn btn-secondary btn-sm m-1" href=" {{url_for('contractor_all_quotes', user_id = contractor.user_id)}}">All Quotes </a> {# Link to view all the contractors given quotes #}
 
 {% endblock content %}

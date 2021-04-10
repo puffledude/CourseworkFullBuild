@@ -2,12 +2,13 @@
 {% block content %}
 <div class="content-section">
     <form method="POST" action="">
+        {#Outputs all the different parts of the form #}
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">{{ legend }}</legend>
             <div class="form-group">
                 {{ form.summary.label(class="form-control-label") }}
-                {% if form.summary.errors %}
+                {% if form.summary.errors %} {#Checks for errors#}
                     {{ form.summary(class="form-control form-control-lg is-invalid") }}
                     <div class="invalid-feedback">
                         {% for error in form.summary.errors %}
@@ -33,7 +34,7 @@
             </div>
         </fieldset>
         <div class="form-group">
-            {{ form.submit(class="btn btn-outline-info") }}
+            {{ form.submit(class="btn btn-outline-info") }}  {# submit button #}
         </div>
     </form>
 </div>

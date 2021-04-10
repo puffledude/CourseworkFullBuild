@@ -27,6 +27,8 @@ class User(db.Model, UserMixin):  # User table
     business= db.Column(db.String(150), nullable=True)
     password = db.Column(db.String(64), nullable=False)
     properties = db.relationship("Properties",cascade="all, delete-orphan" ,backref="User", lazy=True)
+    # The cascades determine that if the user is deleted, all data related to them (i.e any properties linked to them)
+    # will also be deletedd
     occupants = db.relationship("Tenancies", backref="User", secondary=occupants, lazy=True)
     contractor = db.relationship("Quotes", cascade="all, delete-orphan",backref="User", lazy=True)
 

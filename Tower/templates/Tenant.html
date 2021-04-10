@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="content-section">
-    <h2 class="account-heading"> {{ users.name }}</h2>
+    <h2 class="account-heading"> {{ users.name }}</h2> {# Outputs tenants details #}
     <br>
     <p>Email: {{users.email }} <br>Phone number: {{users.phone_number}}</p>
 </div>
@@ -15,7 +15,7 @@
 {% endif %}
 <div class="content-section">
     <p> Current Tenancies: </p>
-    {% for current in tenancies %}
+    {% for current in tenancies %} {#Outputs all places where the tenant is an occupant#}
     <h3><a class="article-title" href="{{ url_for('Property', property_id = current.Properties.property_id) }}"> {{current.Properties.address_line_1}} {{current.Properties.address_line_2}}</a></h3>
         <p>Landlord: <a class="article-title" href="{{ url_for('Landlord', user_id = current.Properties.property_id) }}"> {{current.User.name}} </a></p>
         <br>

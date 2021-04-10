@@ -1,14 +1,16 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div class="article-title">
+{# Specialised Job page for Contractors #}
+
+<div class="article-title"> {#Title of the section#}
     <h2>Job details</h2>
 </div>
 
-<div class="content-section">
+<div class="content-section"> {# Outputs data related to the job #}
     <p>Job summary: {{job.summary}}</p>
     <p>Job details: {{job.content}}</p>
-    <h2 class="article-title"> Notes</h2>
+    <h2 class="article-title"> Notes</h2> {#Title of the section#}
     <a class="btn btn-secondary btn-sm m-1" href=" {{url_for('add_job_note', job_id = job.job_id)}}">Add a note</a>
     {%for note in notes.items%}
     <div class="content-section">
@@ -22,20 +24,20 @@
 </div>
 
 
-<div class="article-title">
+<div class="article-title"> {#Title of the section#}
     <h2>Full issue</h2>
 </div>
 
-<div class="content-section">
+<div class="content-section">  {# Outputs data related to the issue #}
     <p>Issue summary: {{issue.summary}}</p>
     <p>Issue details: {{issue.content}}</p>
 </div>
 
-<div class="article-title">
+<div class="article-title">  {#Title of the section#}
     <h2>Location details</h2>
 </div>
 
-<div class="content-section">
+<div class="content-section">  {# Outputs location of the job #}
     <p>{{location.address_line_1}} {{location.address_line_2}}</p>
     <p>Postcode: {{location.postcode}} </p>
     <h2 class="article-title">Occupants</h2>
@@ -51,7 +53,7 @@
     <p>Email: {{landlord.email}}</p>
 </div>
 
-<div class="content-section">
+<div class="content-section">  {# Tells the contractor the quote they gave #}
     <h2> Quote given</h2>
     <p>{{quote.content}}</p>
 </div>

@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+{# form segment where searchdata is entered #}
     <div class="content-section">
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
@@ -30,7 +31,7 @@
             </form>
     </div>
 
-
+{# Area where searchdata is outputted #}
     <article class="media content-section">
         <div class="media-body">
             <div class="article-metadata">

@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
+{# Page used for closing jobs #}
 <h2 class="article-section">Close Job</h2>
 <p class="content-section">Are you sure want to close this job? No further action will be able to be made on it<br></p>
-<p>{{job.summary}}</p>
+<p>{{job.summary}}</p> {# Outputs data relating to the job #}
 <p>{{job.content}}</p>
 <form method="POST" action="">
         {{ form.hidden_tag() }}

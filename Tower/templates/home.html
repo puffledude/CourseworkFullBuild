@@ -4,7 +4,7 @@
     <p> This is the home page. Please login to access your data.</p>
 {% endif %}
 
-{% if current_user.is_authenticated %}
+{% if current_user.is_authenticated %}  {#Determines how to show the site depending on if the user is logged in or not #}
     <p>Welcome to the Tower estates web system</p>
 {%endif%}
 

@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
+{# Standard delete page used #}
 <h2 class="article-section">Delete data</h2>
 <p class="content-section">Are you sure want to delete this? Any data reliant on this will be deleted<br></p>
-<form method="POST" action="">
+<form method="POST" action="">  {# Form for confirmation button #}
         {{ form.hidden_tag() }}
     <div class="form-group">
             {{ form.submit(class="btn btn-outline-info") }}

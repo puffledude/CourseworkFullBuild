@@ -5,7 +5,7 @@
 </div>
 
 <div class="content-section">
-    {% for items in places.items %}
+    {% for items in places.items %}  {# Outputs all properties #}
     <div class="content-section">
         <h3><a class="article-title" href=" {{ url_for('Property', property_id= items.Properties.property_id) }}">{{items.Properties.address_line_1}} {{items.Properties.address_line_2}}</a></h3>
         <p>Postcode: {{items.Properties.postcode}}</p>
@@ -15,11 +15,11 @@
 </div>
 
 <div>
-    <a class="btn btn-secondary btn-sm m-1" href=" {{next_url}}">Next Page</a>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{next_url}}">Next Page</a> {# Button to go to next page of properties #}
 </div>
 
 <div>
-    <a class="btn btn-secondary btn-sm m-1" href=" {{prev_url}}">Previous Page</a>
+    <a class="btn btn-secondary btn-sm m-1" href=" {{prev_url}}">Previous Page</a> {# Button to go to previous page of properties #}
 </div>
 
 {% endblock content %}
