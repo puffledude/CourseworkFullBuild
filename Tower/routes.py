@@ -235,8 +235,11 @@ def Delete_user(user_id):
     if current_user.role != ("Admin"):
         abort(403)
     form = Delete_Form()
+    user = db.session.query(User).filter(User.user_id == user_id).first()
+    if user not in locals():  # If the variable user is not detected
+        abort(404)
     if form.validate_on_submit():  # If the form validates on submission
-        user = db.session.query(User).filter(User.user_id == user_id).first()
+
         for present in user.Tenancies:  # Unlinks a user from a Tenancy
             user.Tenancies.remove(present)
         db.session.delete(user)  # Deletes the user
@@ -585,7 +588,7 @@ Thank you'''
     return render_template("Invite_contractor.html", title="Invite a contractor", form=form)
 
 
-@app.route("/Add_quote/<int:job_id>", methods=["GET", "POST"])
+@app.route("/Add_quote/<int:job_id>", methods=["GET", "POST"])  # Adds a quote to the database
 @login_required
 def Add_quote(job_id):
     if current_user.role != "Contractor":
@@ -605,7 +608,7 @@ def Add_quote(job_id):
 
 @app.route("/Approve_quote/<int:quote_id>", methods=["GET", "POST"])
 @login_required
-def Approve_quote(quote_id):
+def Approve_quote(quote_id):  # Approving a quote
     if current_user.role != "Admin":
         abort(403)
     form = Approve_Form()
@@ -613,14 +616,14 @@ def Approve_quote(quote_id):
     job = db.session.query(Jobs).filter_by(job_id=quote.job).first()
     already_approved = False
     all_quotes = db.session.query(Quotes).filter_by(job=job.job_id).all()
-    for quotes in all_quotes:
+    for quotes in all_quotes:  # Ensures a quote hasn't already been accepted for a job
         if quotes.chosen == True:
             already_approved = True
     if already_approved == True:
-        flash("Quote has already been approved")
+        flash("Quote has already been approved", "warning")
         return redirect(url_for("Job", job_id=job.job_id))
     if form.validate_on_submit():
-        quote.chosen = True
+        quote.chosen = True  # Marks a quote as accepted
         db.session.commit()
         issue = db.session.query(Issue).filter(Issue.issue_id == job.issue).first()
         place = db.session.query(Properties).filter(Properties.property_id == issue.property_id).first()
@@ -639,7 +642,7 @@ def Approve_quote(quote_id):
     return render_template("Approval.html", title="Approve a quote", form=form, quote=quote)
 
 
-@app.route("/Contractor/<int:user_id>")
+@app.route("/Contractor/<int:user_id>")  # Contractor user page
 @login_required
 def Contractor(user_id):
     if current_user.role == "Tenant" or current_user.role == "Landlord":
@@ -648,7 +651,7 @@ def Contractor(user_id):
     contractor = db.session.query(User).filter_by(user_id=user_id).first()
     approved = db.session.query(Quotes, Jobs).outerjoin(Quotes, Jobs.job_id == Quotes.job).filter_by(
         contractor=contractor.user_id).filter_by(chosen=True).filter(Jobs.closed == False).order_by(Quotes.created.desc())
-    approved_quotes = approved.paginate(page,  per_page=5)
+    approved_quotes = approved.paginate(page,  per_page=5)  # Turns the query into a pagination object
     approved_next = url_for("Contractor", user_id=user_id, page=approved_quotes.next_num)\
         if approved_quotes.has_next else None
     approved_prev = url_for("Contractor", user_id=user_id, page=approved_quotes.prev_num) \
@@ -664,9 +667,10 @@ def delete_issue(issue_id):
     if current_user.role != "Admin":
         abort(403)
     form = Delete_Form()
+    issue = db.session.query(Issue).filter_by(issue_id=issue_id).first()
+    if issue not in locals():  # If the issue doesn't exist abort
+        abort(404)
     if form.validate_on_submit():
-        #return redirect(url_for("Issue_page", issue_id=issue_id))
-        issue = db.session.query(Issue).filter_by(issue_id=issue_id).first()
         db.session.delete(issue)
         db.session.commit()
         return redirect(url_for("all_issues"))
@@ -674,7 +678,7 @@ def delete_issue(issue_id):
 
 @app.route("/contractor_job/<int:job_id>")
 @login_required
-def contractor_job(job_id):
+def contractor_job(job_id):  # Details of a job shown to a contractor
     page = request.args.get("page", 1, type=int)
     quote = db.session.query(Quotes).filter_by(job = job_id).first()
     job = db.session.query(Jobs).filter_by(job_id = job_id).first()
@@ -694,7 +698,7 @@ def contractor_job(job_id):
                            landlord=landlord, occupants=occupants, title="Job", next_url=next_url, prev_url=prev_url,
                            notes=notes)
 
-@app.route("/contractor_all_quotes/<int:user_id>")
+@app.route("/contractor_all_quotes/<int:user_id>") # Outputs all quotes a contractor has made
 @login_required
 def contractor_all_quotes(user_id):
     page = request.args.get("page", 1, type=int)
@@ -707,7 +711,8 @@ def contractor_all_quotes(user_id):
     return render_template("contractor_all_quotes.html", all_quotes=all_quotes, next_url=next_url, prev_url=prev_url,
                            title="Contractor quotes")
 
-@app.route("/add_job_note/<int:job_id>", methods=["GET", "POST"])
+
+@app.route("/add_job_note/<int:job_id>", methods=["GET", "POST"])  # Add a note to a job
 @login_required
 def add_job_note(job_id):
     form = note_form()
@@ -715,20 +720,21 @@ def add_job_note(job_id):
         note = Jobs_Notes(title=form.title.data, content=form.content.data, job=job_id)
         db.session.add(note)
         db.session.commit()
-        if current_user.role != "Contractor":
+        if current_user.role != "Contractor":  # If the current user's role is a contractor, redirect to contractors job details page.
             return redirect(url_for("Job", job_id=job_id))
         else:
             return redirect(url_for("contractor_job", job_id=job_id))
     return render_template("issue_note.html", form=form, title="Add a job")
 
-@app.route("/delete_job_note/<int:note_id>", methods=["GET", "POST"])
+
+@app.route("/delete_job_note/<int:note_id>", methods=["GET", "POST"])  # Deletes a note on a job
 @login_required
 def delete_job_note(note_id):
     if current_user.role != "Admin":
         abort(403)
     form = Delete_Form()
     note = db.session.query(Jobs_Notes).filter_by(note_id=note_id).first()
-    if note not in locals():
+    if note not in locals():  # If the note doesn't exist, abort
         abort(404)
     if form.validate_on_submit():
         job = db.session.query(Jobs).filter(Jobs.job_id == note.job).first()
@@ -738,14 +744,14 @@ def delete_job_note(note_id):
         return redirect(url_for("Job", job_id=job.job_id))
     return render_template("Delete_page.html", title="Delete Note", form=form)
 
-@app.route("/delete_issue_note/<int:note_id>", methods=["GET", "POST"])
+@app.route("/delete_issue_note/<int:note_id>", methods=["GET", "POST"])  # Delete's a note tied to an issue
 @login_required
 def delete_issue_note(note_id):
     if current_user.role != "Admin":
         abort(403)
     form = Delete_Form()
-    note = db.session.query(Issue_Notes).filter_by(note_id=note_id).first()
-    if note not in locals():
+    note = db.session.query(Issue_Notes).filter_by(note_id=note_id).first()  # Gets the note
+    if note not in locals():  # If the notes doesn't exist, abort
         abort(404)
     if form.validate_on_submit():
         issue = db.session.query(Issue).filter(Issue.issue_id == note.issue).first()
@@ -755,23 +761,23 @@ def delete_issue_note(note_id):
         return redirect(url_for("Issue_page", issue_id=issue.issue_id))
     return render_template("Delete_page.html",title="Delete Note", form=form)
 
-@app.route("/job_closing/<int:job_id>", methods=["GET", "POST"])
+@app.route("/job_closing/<int:job_id>", methods=["GET", "POST"])  # Marks a job as closed
 @login_required
 def job_closing(job_id):
     if current_user.role != "Admin":
         abort(403)
     job = db.session.query(Jobs).filter_by(job_id = job_id).first()
-    form = Close_Form()
+    form = Close_Form()  # Job closure form
     if form.validate_on_submit():
         issue = db.session.query(Issue).filter(Issue.issue_id == job.issue).first()
         job.closed = True
         db.session.commit()
         flash("Job has been marked as complete", "success")
         return redirect(url_for("Issue_page", issue_id=issue.issue_id))
-    return render_template("job_closing.html", form=form, job=job)
+    return render_template("job_closing.html", form=form, job=job)  # Renders job closure page, passing over the form and the job details
 
 
-@app.route("/issue_closing/<int:issue_id>", methods=["GET", "POST"])
+@app.route("/issue_closing/<int:issue_id>", methods=["GET", "POST"])  # Marks an issue as closed
 @login_required
 def issue_closing(issue_id):
     if current_user.role != "Admin":
@@ -783,19 +789,20 @@ def issue_closing(issue_id):
         db.session.commit()
         flash("Job has been marked as complete", "success")
         return redirect(url_for("Issue_page", issue_id=issue.issue_id))
-    return render_template("issue_closing.html", form=form, issue=issue)
+    return render_template("issue_closing.html", form=form, issue=issue) # Renders job closure page, passing over the form and the job details
 
-@app.route("/all_properties")
+
+@app.route("/all_properties")  # Outputs all properties on a page
 @login_required
 def all_properties():
     if current_user.role != "Admin":
         abort(403)
     page = request.args.get("page", 1, type=int)
     all_places = db.session.query(Properties, User).outerjoin(Properties, User.user_id == Properties.landlord_id).filter(Properties.landlord_id == User.user_id).order_by(Properties.property_id.desc())
-    places = all_places.paginate(page, per_page=8)
+    places = all_places.paginate(page, per_page=8)  # Turns the query into a pagination object
     print(places)
     next_url = url_for("all_properties", page=places.next_num) \
         if places.has_next else None
     prev_url = url_for("all_properties", page=places.prev_num) \
         if places.has_prev else None
-    return render_template("all_properties.html", places=places, prev_url=prev_url, next_url=next_url)
+    return render_template("all_properties.html", places=places, prev_url=prev_url, next_url=next_url)  # Creates the page with the data supplied.
