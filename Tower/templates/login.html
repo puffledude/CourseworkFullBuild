@@ -6,7 +6,7 @@
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4"> Log In </legend>
                 <div class="form-group">
-                    {{ form.email.label(class="form-control-label")}} {# email element #}}
+                    {{ form.email.label(class="form-control-label")}} {# email element #}
                     {% if form.email.errors %}
                         {{ form.email(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
