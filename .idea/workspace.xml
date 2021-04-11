@@ -19,10 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="S">
+    <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/templates/all_users.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/all_users.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/site.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,14 +130,8 @@
       <workItem from="1618062364953" duration="611000" />
       <workItem from="1618076187735" duration="7440000" />
       <workItem from="1618087133779" duration="1152000" />
-      <workItem from="1618136586421" duration="307000" />
-    </task>
-    <task id="LOCAL-00001" summary="Unfucked directory structure">
-      <created>1615561325362</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1615561325362</updated>
+      <workItem from="1618136586421" duration="3039000" />
+      <workItem from="1618153819343" duration="1358000" />
     </task>
     <task id="LOCAL-00002" summary="Unfucked directory structure">
       <created>1615561455975</created>
@@ -466,7 +462,21 @@
       <option name="project" value="LOCAL" />
       <updated>1618088270401</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Output role">
+      <created>1618136929337</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1618136929337</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Changes to make site suitable for deployment">
+      <created>1618137028678</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1618137028679</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -495,8 +505,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Contractor job reachable from contractor page" />
-    <MESSAGE value="Fixed Error" />
     <MESSAGE value="Formatting" />
     <MESSAGE value="All quotes output for contractors" />
     <MESSAGE value="Redirection changes" />
@@ -520,9 +528,11 @@
     <MESSAGE value="Even more commenting" />
     <MESSAGE value="Forgotten comments" />
     <MESSAGE value="Comment fixup" />
-    <option name="LAST_COMMIT_MESSAGE" value="Comment fixup" />
+    <MESSAGE value="Output role" />
+    <MESSAGE value="Changes to make site suitable for deployment" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes to make site suitable for deployment" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CourseworkFullBuild$run.coverage" NAME="run Coverage Results" MODIFIED="1618136858752" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CourseworkFullBuild$run.coverage" NAME="run Coverage Results" MODIFIED="1618158150861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -236,10 +236,7 @@ def Delete_user(user_id):
         abort(403)
     form = Delete_Form()
     user = db.session.query(User).filter(User.user_id == user_id).first()
-    if user not in locals():  # If the variable user is not detected
-        abort(404)
     if form.validate_on_submit():  # If the form validates on submission
-
         for present in user.Tenancies:  # Unlinks a user from a Tenancy
             user.Tenancies.remove(present)
         db.session.delete(user)  # Deletes the user
