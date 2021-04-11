@@ -123,19 +123,19 @@ def logout():
     return redirect(url_for("home"))
 
 
-@app.route("/emergency", methods=["GET", "POST"])  # Disable before deployment !!!!!!!
-def emergency():
-    form = RegistrationForm()  # Loads registration form from forms
-    if form.validate_on_submit():  # Checks if the form is valid
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
-        user = User(name=form.name.data, phone_number=form.phone_number.data, email=form.email.data,
-                    role=form.role.data, business=form.business.data, password=hashed_password)
-        db.session.add(user)
-        db.session.commit()  # Commits new entry to the database
-        flash("The account has been created!", "success")
-        return redirect(url_for("home"))
-
-    return render_template("register.html", title="Register", form=form)  # Renders template for the user
+# @app.route("/emergency", methods=["GET", "POST"])  # Disable before deployment !!!!!!!
+# def emergency():
+#     form = RegistrationForm()  # Loads registration form from forms
+#     if form.validate_on_submit():  # Checks if the form is valid
+#         hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
+#         user = User(name=form.name.data, phone_number=form.phone_number.data, email=form.email.data,
+#                     role=form.role.data, business=form.business.data, password=hashed_password)
+#         db.session.add(user)
+#         db.session.commit()  # Commits new entry to the database
+#         flash("The account has been created!", "success")
+#         return redirect(url_for("home"))
+#
+#     return render_template("register.html", title="Register", form=form)  # Renders template for the user
 
 
 @app.route("/new_tenancy", methods=["GET", "POST"])  # Creates a new open tenancy on a property
