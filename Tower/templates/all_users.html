@@ -10,16 +10,16 @@
         {%if user.role == ('Tenant')%} {# Ensures each user printed gets redirected to the correct role page #}
         <h2 class="article-title"></h2>
         <h2><a class="article-title"href=" {{ url_for('Tenant', user_id= user.user_id) }}">{{user.name}}</a></h2>
-        <p>Phone number: {{user.phone_number}} <br> Email: {{user.email}}</p>
+        <p>Phone number: {{user.phone_number}} <br> Email: {{user.email}} <br>Role: {{user.role}}</p>
         {%elif user.role == ('Landlord')%}
         <h2><a class="article-title"href=" {{ url_for('Landlord', user_id= user.user_id) }}">{{user.name}}</a></h2>
-        <p>Phone number: {{user.phone_number}} <br> Email: {{user.email}}</p>
+        <p>Phone number: {{user.phone_number}} <br> Email: {{user.email}} <br>Role: {{user.role}}</p>
         {%elif user.role == ('Contractor')%}
         <h2><a class="article-title"href=" {{ url_for('Contractor', user_id= user.user_id)}}">{{user.name}}</a></h2>
-        <p>Phone number: {{user.phone_number}} <br> Email: {{user.email}}</p>
+        <p>Phone number: {{user.phone_number}} <br> Email: {{user.email}} <br>Role: {{user.role}}</p>
         {%else%}
         <h2><a class="article-title"href=" {{ url_for('Admin', user_id= user.user_id) }}">{{user.name}}</a></h2>
-        <p>Phone number: {{user.phone_number}} <br> Email: {{user.email}}</p>
+        <p>Phone number: {{user.phone_number}} <br> Email: {{user.email}} <br>Role: {{user.role}}</p>
         {% endif %}
     </div>
     {%endfor%}
