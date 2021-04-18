@@ -19,14 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Tower/templates/500.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/site.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tower/templates/Property.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Property.html" afterDir="false" />
-    </list>
+    <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -140,21 +133,7 @@
       <workItem from="1618330322983" duration="7331000" />
       <workItem from="1618508014246" duration="7793000" />
       <workItem from="1618590799852" duration="31000" />
-      <workItem from="1618758488068" duration="1996000" />
-    </task>
-    <task id="LOCAL-00003" summary="Extra details in Tenant Page.">
-      <created>1615563379888</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1615563379888</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Added issues link to sidebar">
-      <created>1615571590685</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1615571590685</updated>
+      <workItem from="1618758488068" duration="2703000" />
     </task>
     <task id="LOCAL-00005" summary="Deletion on Tenants">
       <created>1615727278736</created>
@@ -485,7 +464,21 @@
       <option name="project" value="LOCAL" />
       <updated>1618167089562</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Allow for viewing when a Tenancy is open but there are no occupants">
+      <created>1618760535449</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1618760535449</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Adding 500 error custom page">
+      <created>1618760553468</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1618760553468</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -514,8 +507,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="All quotes output for contractors" />
-    <MESSAGE value="Redirection changes" />
     <MESSAGE value="Adding notes to jobs" />
     <MESSAGE value="Resolution's initial commit" />
     <MESSAGE value="Deleting notes" />
@@ -539,9 +530,11 @@
     <MESSAGE value="Output role" />
     <MESSAGE value="Changes to make site suitable for deployment" />
     <MESSAGE value="Full build?" />
-    <option name="LAST_COMMIT_MESSAGE" value="Full build?" />
+    <MESSAGE value="Allow for viewing when a Tenancy is open but there are no occupants" />
+    <MESSAGE value="Adding 500 error custom page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding 500 error custom page" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CourseworkFullBuild$run.coverage" NAME="run Coverage Results" MODIFIED="1618760299751" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CourseworkFullBuild$run.coverage" NAME="run Coverage Results" MODIFIED="1618762174369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
