@@ -113,8 +113,6 @@ class Jobs_Notes(db.Model):  # Notes for Jobs table
     post_time = db.Column(db.DateTime, default=datetime.utcnow)
 
 
-
-
 class Quotes(db.Model):  # Quotes for jobs table
     quote_id = db.Column(db.Integer, primary_key=True)
     created = db.Column(db.DateTime, default=datetime.utcnow)

@@ -25,6 +25,10 @@ def unauthorised(e):
     return render_template("403.html")
 
 
+@app.errorhandler(500)
+def gone_wrong(e):
+    return render_template("500.html")
+
 @app.route("/about")  # About Page
 def about():
     return render_template("about.html")
