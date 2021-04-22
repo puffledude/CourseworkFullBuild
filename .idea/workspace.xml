@@ -19,7 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="" />
+    <list default="true" id="50a1d6dd-d662-404d-a59a-68ab687b8ce8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/site.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/templates/Job.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Job.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tower/templates/Property.html" beforeDir="false" afterPath="$PROJECT_DIR$/Tower/templates/Property.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -133,14 +138,15 @@
       <workItem from="1618330322983" duration="7331000" />
       <workItem from="1618508014246" duration="7793000" />
       <workItem from="1618590799852" duration="31000" />
-      <workItem from="1618758488068" duration="2703000" />
-    </task>
-    <task id="LOCAL-00005" summary="Deletion on Tenants">
-      <created>1615727278736</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1615727278736</updated>
+      <workItem from="1618758488068" duration="5342000" />
+      <workItem from="1618848524441" duration="25000" />
+      <workItem from="1618849113287" duration="826000" />
+      <workItem from="1618936233089" duration="20000" />
+      <workItem from="1618948261043" duration="3000" />
+      <workItem from="1619030868441" duration="2000" />
+      <workItem from="1619033377174" duration="124000" />
+      <workItem from="1619038239319" duration="1301000" />
+      <workItem from="1619117732594" duration="402000" />
     </task>
     <task id="LOCAL-00006" summary="Deletion warning page">
       <created>1615728793889</created>
@@ -478,7 +484,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618760553468</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Fixed a bug where it set the url for the Landlord redirect as the property id, not the landlord id.">
+      <created>1618762412707</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1618762412707</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,7 +520,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Adding notes to jobs" />
     <MESSAGE value="Resolution's initial commit" />
     <MESSAGE value="Deleting notes" />
     <MESSAGE value="Improved note deletion" />
@@ -532,9 +544,10 @@
     <MESSAGE value="Full build?" />
     <MESSAGE value="Allow for viewing when a Tenancy is open but there are no occupants" />
     <MESSAGE value="Adding 500 error custom page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding 500 error custom page" />
+    <MESSAGE value="Fixed a bug where it set the url for the Landlord redirect as the property id, not the landlord id." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a bug where it set the url for the Landlord redirect as the property id, not the landlord id." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CourseworkFullBuild$run.coverage" NAME="run Coverage Results" MODIFIED="1618762174369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CourseworkFullBuild$run.coverage" NAME="run Coverage Results" MODIFIED="1619117808167" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

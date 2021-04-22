@@ -21,6 +21,8 @@
     {% for thing in quotes %} {# Outputs all the quotes for a job #}
         <div class="content-section">
             <h3> {{thing.User.name}}</h3>
+            <p>{{thing.User.email}}</p>
+            <p>{{thing.User.phone_number}}</p>
             <p> {{thing.Quotes.content}} </p>
             {% if approved == False %}
             <a class="btn btn-secondary btn-sm m-1" href="{{url_for('Approve_quote', quote_id = thing.Quotes.quote_id) }}">Approve Quote</a>

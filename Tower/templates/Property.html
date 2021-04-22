@@ -8,7 +8,7 @@
 <div class="content-section">
     <h2><a class="article-title" href="{{ url_for('Landlord', user_id= property.Properties.landlord_id) }}">Landlord: {{property.User.name}}</a></h2>
     <h3>Contact Details:</h3>
-    <p>Email: {{property.User.name}} <br>Phone number: {{property.User.phone_number}}
+    <p>Email: {{property.User.email}} <br>Phone number: {{property.User.phone_number}}
 </div>
 {% if current_user.role == ('Admin') %}
 <div>
