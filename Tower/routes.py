@@ -333,9 +333,6 @@ def Update_Property(property_id):
 
     form.Landlord.choices = landlord_list  # Fills in the landlord choices box
 
-
-
-
     if form.validate_on_submit():
         property.address_line_1 = form.address_line_1.data
         property.address_line_2 = form.address_line_2.data
